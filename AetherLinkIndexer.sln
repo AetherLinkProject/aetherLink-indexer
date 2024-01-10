@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{978E59B4-E75A-44F8-84B6-4C05F2ABF9E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D118664F-EB5F-4802-9C6B-2A4DC88BE40E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetherLink.Indexer", "src\AetherLink.Indexer\AetherLink.Indexer.csproj", "{D6C394B6-84C1-4CF1-966B-6E80E6591E8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetherLink.Indexer.Orleans.TestBase", "test\AetherLink.Indexer.Orleans.TestBase\AetherLink.Indexer.Orleans.TestBase.csproj", "{5DB58A30-B56F-47DA-A454-DC607D716584}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetherLink.Indexer.Tests", "test\AetherLink.Indexer.Tests\AetherLink.Indexer.Tests.csproj", "{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetherLink.Indexer.TestBase", "test\AetherLink.Indexer.TestBase\AetherLink.Indexer.TestBase.csproj", "{DFB74E26-3295-4BFE-B768-06B744FA2157}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6C394B6-84C1-4CF1-966B-6E80E6591E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C394B6-84C1-4CF1-966B-6E80E6591E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C394B6-84C1-4CF1-966B-6E80E6591E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C394B6-84C1-4CF1-966B-6E80E6591E8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB58A30-B56F-47DA-A454-DC607D716584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB58A30-B56F-47DA-A454-DC607D716584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB58A30-B56F-47DA-A454-DC607D716584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB58A30-B56F-47DA-A454-DC607D716584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB74E26-3295-4BFE-B768-06B744FA2157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB74E26-3295-4BFE-B768-06B744FA2157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB74E26-3295-4BFE-B768-06B744FA2157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB74E26-3295-4BFE-B768-06B744FA2157}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6C394B6-84C1-4CF1-966B-6E80E6591E8A} = {978E59B4-E75A-44F8-84B6-4C05F2ABF9E2}
+		{5DB58A30-B56F-47DA-A454-DC607D716584} = {D118664F-EB5F-4802-9C6B-2A4DC88BE40E}
+		{7CF57FA8-9FCC-4833-8D93-7EB6B9ECF553} = {D118664F-EB5F-4802-9C6B-2A4DC88BE40E}
+		{DFB74E26-3295-4BFE-B768-06B744FA2157} = {D118664F-EB5F-4802-9C6B-2A4DC88BE40E}
+	EndGlobalSection
+EndGlobal
