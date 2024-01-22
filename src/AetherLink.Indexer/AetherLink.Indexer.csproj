@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="AElfIndexer.Client" Version="1.0.0-24" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="Generated\ConsumerContract.c.cs" />
+        <Compile Remove="Generated\ConsumerContract.g.cs" />
+    </ItemGroup>
+</Project>
