@@ -1,4 +1,4 @@
-# AetherlinkServer
+# Aetherlink Indexer
 
 Aetherlink Indexer is an interface plugin project running on the aelf blockchain scanning system, acting as a bridge between blockchain data and Web3 applications. In simple terms, its main functions include:
 
@@ -31,7 +31,3 @@ The Aetherlink Indexer provides the following modules:
 ## Contributing
 
 We welcome contributions to the Aetherlink Indexer project. If you would like to contribute, please fork the repository and submit a pull request with your changes. Before submitting a pull request, please ensure that your code is well-tested and adheres to the aelf coding standards.
-
-## Contact
-
-If you have any questions or feedback, please feel free to contact us at the Aetherlink community channels. You can find us on Discord, Telegram, and other social media platforms.
