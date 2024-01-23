@@ -16,14 +16,13 @@ namespace AetherLink.Indexer.Tests;
 
 public class AetherLinkIndexerDappTests : AetherLinkIndexerOrleansTestBase<AetherLinkIndexerDappTestModule>
 {
-    
     private readonly IAElfIndexerClientInfoProvider _indexerClientInfoProvider;
-    public IBlockStateSetProvider<LogEventInfo> _blockStateSetLogEventInfoProvider;
+    private readonly IBlockStateSetProvider<LogEventInfo> _blockStateSetLogEventInfoProvider;
     private readonly IBlockStateSetProvider<TransactionInfo> _blockStateSetTransactionInfoProvider;
     private readonly IDAppDataProvider _dAppDataProvider;
     private readonly IDAppDataIndexManagerProvider _dAppDataIndexManagerProvider;
 
-    public AetherLinkIndexerDappTests()
+    protected AetherLinkIndexerDappTests()
     {
         _indexerClientInfoProvider = GetRequiredService<IAElfIndexerClientInfoProvider>();
         _blockStateSetLogEventInfoProvider = GetRequiredService<IBlockStateSetProvider<LogEventInfo>>();
@@ -32,7 +31,7 @@ public class AetherLinkIndexerDappTests : AetherLinkIndexerOrleansTestBase<Aethe
         _dAppDataIndexManagerProvider = GetRequiredService<IDAppDataIndexManagerProvider>();
     }
 
-    protected async Task<string> InitializeBlockStateSetAsync(BlockStateSet<LogEventInfo> blockStateSet, string chainId)
+    private async Task<string> InitializeBlockStateSetAsync(BlockStateSet<LogEventInfo> blockStateSet, string chainId)
     {
         var key = GrainIdHelper.GenerateGrainId("BlockStateSets", _indexerClientInfoProvider.GetClientId(), chainId,
             _indexerClientInfoProvider.GetVersion());
@@ -68,16 +67,15 @@ public class AetherLinkIndexerDappTests : AetherLinkIndexerOrleansTestBase<Aethe
     }
 
     protected LogEventContext MockLogEventContext(long inputBlockHeight)
-    {        
+    {
         const string chainId = "tDVW";
         const string blockHash = "dac5cd67a2783d0a3d843426c2d45f1178f4d052235a907a0d796ae4659103b1";
         const string previousBlockHash = "e38c4fb1cf6af05878657cb3f7b5fc8a5fcfb2eec19cd76b73abb831973fbf4e";
         const string transactionId = "c1e625d135171c766999274a00a7003abed24cfe59a7215aabf1472ef20a2da2";
-        long blockHeight = inputBlockHeight;
         return new LogEventContext
         {
             ChainId = chainId,
-            BlockHeight = blockHeight,
+            BlockHeight = inputBlockHeight,
             BlockHash = blockHash,
             PreviousBlockHash = previousBlockHash,
             TransactionId = transactionId,
@@ -108,76 +106,4 @@ public class AetherLinkIndexerDappTests : AetherLinkIndexerOrleansTestBase<Aethe
         };
         return await InitializeBlockStateSetAsync(blockStateSet, logEventContext.ChainId);
     }
-    
-    
-    protected async Task MockConfigSet(int height)
-    {
-        var logEventContext = MockLogEventContext(height);
-        var blockStateSetKey = await MockBlockState(logEventContext);
-
-        var configSet = new ConfigSet()
-        {
-            PreviousConfigBlockNumber = 1,
-            ConfigDigest = HashHelper.ComputeFrom("test@google.com"),
-            ConfigCount = 2,
-            Signers = new AddressList()
-            {
-                Data = { Address.FromPublicKey("AAA".HexToByteArray()), Address.FromPublicKey("BBB".HexToByteArray()) }
-            },
-            Transmitters = 
-                new AddressList()
-                {
-                    Data = { Address.FromPublicKey("CCC".HexToByteArray()), Address.FromPublicKey("DDD".HexToByteArray()) }
-                },
-            F = 1,
-            OffChainConfigVersion = 1,
-            OffChainConfig = ByteString.Empty
-        };
-        var logEventInfo = MockLogEventInfo(configSet.ToLogEvent());
-        var configSetLogEventProcessor = GetRequiredService<ConfigSetLogEventProcessor>();
-        await configSetLogEventProcessor.HandleEventAsync(logEventInfo, logEventContext);
-        await BlockStateSetSaveDataAsync<LogEventInfo>(blockStateSetKey);
-    }
-    
-    protected async Task MockRequestStarted(int height)
-    {
-        var logEventContext = MockLogEventContext(height);
-        var blockStateSetKey = await MockBlockState(logEventContext);
-
-        var requestStarted = new RequestStarted()
-        {
-            RequestId = HashHelper.ComputeFrom("test@google.com"),
-            RequestingContract = Address.FromPublicKey("AAA".HexToByteArray()),
-            RequestingInitiator = Address.FromPublicKey("BBB".HexToByteArray()),
-            SubscriptionId = 1,
-            SubscriptionOwner = Address.FromPublicKey("CCC".HexToByteArray()),
-            Commitment = HashHelper.ComputeFrom("Commitment").ToByteString(),
-            RequestTypeIndex = 1
-        };
-        
-        var logEventInfo = MockLogEventInfo(requestStarted.ToLogEvent());
-        var requestStartedLogEventProcessor = GetRequiredService<RequestStartedLogEventProcessor>();
-        await requestStartedLogEventProcessor.HandleEventAsync(logEventInfo, logEventContext);
-        await BlockStateSetSaveDataAsync<LogEventInfo>(blockStateSetKey);
-    }
-    
-    protected async Task MockTransmitted(int height)
-    {
-        var logEventContext = MockLogEventContext(height);
-        var blockStateSetKey = await MockBlockState(logEventContext);
-
-        var requestStarted = new Transmitted()
-        {
-            RequestId = HashHelper.ComputeFrom("test@google.com"),
-            ConfigDigest = HashHelper.ComputeFrom("test"),
-            EpochAndRound = 1,
-            Transmitter = Address.FromPublicKey("CCC".HexToByteArray()),
-        };
-        
-        var logEventInfo = MockLogEventInfo(requestStarted.ToLogEvent());
-        var transmittedLogEventProcessor = GetRequiredService<TransmittedLogEventProcessor>();
-        await transmittedLogEventProcessor.HandleEventAsync(logEventInfo, logEventContext);
-        await BlockStateSetSaveDataAsync<LogEventInfo>(blockStateSetKey);
-    }
-    
 }

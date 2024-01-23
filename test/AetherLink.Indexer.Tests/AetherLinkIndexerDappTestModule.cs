@@ -27,14 +27,15 @@ namespace AetherLink.Indexer.Tests;
     typeof(AbpAutofacModule),
     typeof(AElfIndexingElasticsearchModule))]
 public class AetherLinkIndexerDappTestModule : AbpModule
-{ 
-    private string ClientId { get; } = "*";
-    private string Version { get; } = "*";
+{
+    private string ClientId { get; } = "AElf_Oracle_DApp";
+    private string Version { get; } = "AElf_Oracle_DApp_Version";
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var mockEventbus = new Mock<IDistributedEventBus>();
-        mockEventbus.Setup(x => x.PublishAsync(It.IsAny<object>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.CompletedTask);
+        mockEventbus.Setup(x => x.PublishAsync(It.IsAny<object>(), It.IsAny<bool>(), It.IsAny<bool>()))
+            .Returns(Task.CompletedTask);
         context.Services.AddSingleton(mockEventbus.Object);
         Configure<AbpAutoMapperOptions>(options => { options.AddMaps<AetherLinkIndexerDappTestModule>(); });
         context.Services.AddSingleton<IAElfIndexerClientInfoProvider, AElfIndexerClientInfoProvider>();
@@ -74,7 +75,8 @@ public class AetherLinkIndexerDappTestModule : AbpModule
             {
                 new ContractInfo
                 {
-                    AetherLinkOracleContractAddress = "*",
+                    ChainId = "TEST",
+                    AetherLinkOracleContractAddress = "aLyxCJvWMQH6UEykTyeWAcYss9baPyXkrMQ37BHnUicxD2LL3",
                 }
             };
         });
@@ -135,5 +137,4 @@ public class AetherLinkIndexerDappTestModule : AbpModule
             await DeleteIndexAsync(context.ServiceProvider)
         );
     }
-    
 }
