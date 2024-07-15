@@ -11,14 +11,16 @@ public class AetherLinkIndexerAutoMapperProfile : Profile
     {
         // LogEvent Processor Map
         CreateMap<LogEventContext, OcrJobEventIndex>();
-        CreateMap<LogEventContext, CommitmentIndex>();
         CreateMap<LogEventContext, ConfigDigestIndex>();
-        CreateMap<LogEventContext, LatestRoundIndex>();
+        CreateMap<LogEventContext, TransmittedIndex>();
+        CreateMap<LogEventContext, RequestCancelledIndex>();
 
         // Query Map
+        CreateMap<OcrJobEventIndex, CommitmentDto>();
+        CreateMap<TransmittedIndex, TransmittedDto>();
+        CreateMap<RequestCancelledIndex, RequestCancelledDto>();
         CreateMap<OcrJobEventIndex, OcrJobEventDto>();
-        CreateMap<CommitmentIndex, CommitmentDto>();
         CreateMap<ConfigDigestIndex, ConfigDigestDto>();
-        CreateMap<LatestRoundIndex, LatestRoundDto>();
+        CreateMap<TransmittedIndex, RequestStartEpochDto>();
     }
 }
