@@ -440,7 +440,7 @@ namespace AetherLink.Contracts.Oracle {
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.TransmitInput> __Marshaller_TransmitInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.TransmitInput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.CancelRequestInput> __Marshaller_CancelRequestInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.CancelRequestInput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::Google.Protobuf.WellKnownTypes.BoolValue> __Marshaller_google_protobuf_BoolValue = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.BoolValue.Parser.ParseFrom);
-    static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.Config> __Marshaller_Config = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.Config.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.GetConfigOutput> __Marshaller_GetConfigOutput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.GetConfigOutput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::Google.Protobuf.WellKnownTypes.Int32Value> __Marshaller_google_protobuf_Int32Value = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Int32Value.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.Coordinator> __Marshaller_Coordinator = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.Coordinator.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Oracle.CoordinatorList> __Marshaller_CoordinatorList = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Oracle.CoordinatorList.Parser.ParseFrom);
@@ -645,12 +645,12 @@ namespace AetherLink.Contracts.Oracle {
         __Marshaller_google_protobuf_Empty,
         __Marshaller_google_protobuf_BoolValue);
 
-    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.Config> __Method_GetConfig = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.Config>(
+    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.GetConfigOutput> __Method_GetConfig = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.GetConfigOutput>(
         aelf::MethodType.View,
         __ServiceName,
         "GetConfig",
         __Marshaller_google_protobuf_Empty,
-        __Marshaller_Config);
+        __Marshaller_GetConfigOutput);
 
     static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.SubscriptionConfig> __Method_GetSubscriptionConfig = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AetherLink.Contracts.Oracle.SubscriptionConfig>(
         aelf::MethodType.View,
@@ -916,7 +916,7 @@ namespace AetherLink.Contracts.Oracle {
     //     throw new global::System.NotImplementedException();
     //   }
     //
-    //   public virtual global::AetherLink.Contracts.Oracle.Config GetConfig(global::Google.Protobuf.WellKnownTypes.Empty input)
+    //   public virtual global::AetherLink.Contracts.Oracle.GetConfigOutput GetConfig(global::Google.Protobuf.WellKnownTypes.Empty input)
     //   {
     //     throw new global::System.NotImplementedException();
     //   }
