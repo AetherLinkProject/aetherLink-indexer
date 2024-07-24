@@ -1,4 +1,4 @@
-namespace AetherLink.Indexer;
+namespace AetherLink.Indexer.Options;
 
 public class ContractInfoOptions
 {

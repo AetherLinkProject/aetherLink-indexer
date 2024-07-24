@@ -3,6 +3,7 @@ using AElfIndexer.Client.Handlers;
 using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
 using AetherLink.Indexer.Entities;
+using AetherLink.Indexer.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.ObjectMapping;
@@ -34,7 +35,7 @@ public class ConfigSetLogEventProcessor : AElfLogEventProcessorBase<ConfigSet, L
         _logger.LogDebug("[ConfigSet] ConfigSet chainId:{chainId}", context.ChainId);
         var configDigestIndex = new ConfigDigestIndex
         {
-            Id = IdGenerateHelper.GetConfigSetIndexId(context.ChainId),
+            Id = IdGenerateHelper.GetId(IdGenerateHelper.ConfigSetPrefix, context.ChainId),
             ConfigDigest = eventValue.ConfigDigest.ToHex(),
         };
 

@@ -6,6 +6,7 @@ using AElfIndexer.BlockScan;
 using AElfIndexer.Client;
 using AElfIndexer.Client.Handlers;
 using AElfIndexer.Client.Providers;
+using AetherLink.Indexer.Options;
 using AetherLink.Indexer.Orleans.TestBase;
 using Elasticsearch.Net;
 using Microsoft.AspNetCore.Builder;
