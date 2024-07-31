@@ -21,9 +21,8 @@ public class Query
     {
         var version = clientInfoProvider.GetVersion();
         var clientId = clientInfoProvider.GetClientId();
-        var blockStateSetInfoGrain =
-            clusterClient.GetGrain<IBlockStateSetInfoGrain>(
-                GrainIdHelper.GenerateGrainId("BlockStateSetInfo", clientId, input.ChainId, version));
+        var blockStateSetInfoGrain = clusterClient.GetGrain<IBlockStateSetInfoGrain>(
+            GrainIdHelper.GenerateGrainId("BlockStateSetInfo", clientId, input.ChainId, version));
         return new SyncStateDto
         {
             ConfirmedBlockHeight = await blockStateSetInfoGrain.GetConfirmedBlockHeight(input.FilterType)
@@ -35,8 +34,8 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, OcrLogEventInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
 
         if (input.FromBlockHeight > 0)
         {
@@ -59,8 +58,8 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, TransmittedInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
 
         if (input.FromBlockHeight > 0)
         {
@@ -83,8 +82,8 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, RequestCancelledInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<RequestCancelledIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<RequestCancelledIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
 
         if (input.FromBlockHeight > 0)
         {
@@ -108,9 +107,11 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, RequestCommitmentInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.RequestId).Value(input.RequestId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>
+        {
+            q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)),
+            q => q.Term(i => i.Field(f => f.RequestId).Value(input.RequestId))
+        };
 
         QueryContainer Filter(QueryContainerDescriptor<OcrJobEventIndex> f) => f.Bool(b => b.Must(mustQuery));
 
@@ -123,8 +124,8 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, OracleConfigDigestInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<ConfigDigestIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<ConfigDigestIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
 
         QueryContainer Filter(QueryContainerDescriptor<ConfigDigestIndex> f) => f.Bool(b => b.Must(mustQuery));
 
@@ -137,8 +138,8 @@ public class Query
         [FromServices] IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
         [FromServices] IObjectMapper objectMapper, RequestStartEpochQueryInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>();
-        mustQuery.Add(q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)));
+        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
 
         if (input.BlockHeight > 0)
         {
