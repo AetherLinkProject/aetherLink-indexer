@@ -9,4 +9,5 @@ public class ContractInfo
 {
     public string ChainId { get; set; }
     public string AetherLinkOracleContractAddress { get; set; }
+    public string AetherLinkAIOracleContractAddress { get; set; }
 }

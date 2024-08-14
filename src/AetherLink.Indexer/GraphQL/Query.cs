@@ -53,6 +53,23 @@ public class Query
         return objectMapper.Map<List<OcrJobEventIndex>, List<OcrJobEventDto>>(logs);
     }
 
+    [Name("aiRequests")]
+    public static async Task<List<AIRequestDto>> AiRequestsQueryAsync(
+        [FromServices] IAElfIndexerClientEntityRepository<AIRequestIndex, LogEventInfo> repository,
+        [FromServices] IObjectMapper objectMapper, AIRequestInput input)
+    {
+        var mustQuery = new List<Func<QueryContainerDescriptor<AIRequestIndex>, QueryContainer>>
+        {
+            q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)),
+            q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)),
+            q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight))
+        };
+        QueryContainer Filter(QueryContainerDescriptor<AIRequestIndex> f) => f.Bool(b => b.Must(mustQuery));
+
+        var (_, logs) = await repository.GetListAsync(Filter);
+        return objectMapper.Map<List<AIRequestIndex>, List<AIRequestDto>>(logs);
+    }
+
     [Name("transmitted")]
     public static async Task<List<TransmittedDto>> TransmittedQueryAsync(
         [FromServices] IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
@@ -75,6 +92,23 @@ public class Query
 
         var (_, logs) = await repository.GetListAsync(Filter);
         return objectMapper.Map<List<TransmittedIndex>, List<TransmittedDto>>(logs);
+    }
+
+    [Name("aiReportTransmitted")]
+    public static async Task<List<AIReportTransmittedDto>> AIReportTransmittedQueryAsync(
+        [FromServices] IAElfIndexerClientEntityRepository<AIReportTransmittedIndex, LogEventInfo> repository,
+        [FromServices] IObjectMapper objectMapper, AIReportTransmittedInput input)
+    {
+        var mustQuery = new List<Func<QueryContainerDescriptor<AIReportTransmittedIndex>, QueryContainer>>
+        {
+            q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)),
+            q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)),
+            q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight))
+        };
+        QueryContainer Filter(QueryContainerDescriptor<AIReportTransmittedIndex> f) => f.Bool(b => b.Must(mustQuery));
+
+        var (_, logs) = await repository.GetListAsync(Filter);
+        return objectMapper.Map<List<AIReportTransmittedIndex>, List<AIReportTransmittedDto>>(logs);
     }
 
     [Name("requestCancelled")]

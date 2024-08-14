@@ -18,6 +18,8 @@ public class AetherLinkIndexerAutoMapperProfile : Profile
         CreateMap<LogEventContext, ConfigDigestIndex>();
         CreateMap<LogEventContext, TransmittedIndex>();
         CreateMap<LogEventContext, RequestCancelledIndex>();
+        CreateMap<LogEventContext, AIRequestIndex>();
+        CreateMap<LogEventContext, AIReportTransmittedIndex>();
 
         // Query Map
         CreateMap<OcrJobEventIndex, CommitmentDto>();
@@ -27,5 +29,7 @@ public class AetherLinkIndexerAutoMapperProfile : Profile
         CreateMap<ConfigDigestIndex, ConfigDigestDto>();
         CreateMap<TransmittedIndex, RequestStartEpochDto>();
         CreateMap<TransactionEventIndex, TransactionEventDto>();
+        CreateMap<AIRequestIndex, AIRequestDto>();
+        CreateMap<AIReportTransmittedIndex, AIReportTransmittedDto>();
     }
 }

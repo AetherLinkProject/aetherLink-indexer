@@ -19,8 +19,10 @@ public class
         var configuration = serviceCollection.GetConfiguration();
         serviceCollection.AddTransient<IBlockChainDataHandler, AetherLinkTransactionHandler>();
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, RequestStartedLogEventProcessor>();
+        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, AIRequestStartedLogEventProcessor>();
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, ConfigSetLogEventProcessor>();
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, TransmittedLogEventProcessor>();
+        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, AIReportTransmittedLogEventProcessor>();
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, RequestCancelledLogEventProcessor>();
         Configure<ContractInfoOptions>(configuration.GetSection("ContractInfo"));
         Configure<LogPollerOptions>(configuration.GetSection("LogPoller"));
