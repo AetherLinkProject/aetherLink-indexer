@@ -1,4 +1,5 @@
 using AElfIndexer.Client.Handlers;
+using AElfIndexer.Grains.State.Client;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL.Dtos;
 using AutoMapper;
@@ -9,6 +10,9 @@ public class AetherLinkIndexerAutoMapperProfile : Profile
 {
     public AetherLinkIndexerAutoMapperProfile()
     {
+        // Transaction Processor Map
+        CreateMap<TransactionInfo, TransactionEventIndex>();
+
         // LogEvent Processor Map
         CreateMap<LogEventContext, OcrJobEventIndex>();
         CreateMap<LogEventContext, ConfigDigestIndex>();
@@ -22,5 +26,6 @@ public class AetherLinkIndexerAutoMapperProfile : Profile
         CreateMap<OcrJobEventIndex, OcrJobEventDto>();
         CreateMap<ConfigDigestIndex, ConfigDigestDto>();
         CreateMap<TransmittedIndex, RequestStartEpochDto>();
+        CreateMap<TransactionEventIndex, TransactionEventDto>();
     }
 }

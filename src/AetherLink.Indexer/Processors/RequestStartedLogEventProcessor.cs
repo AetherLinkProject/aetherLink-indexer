@@ -3,6 +3,7 @@ using AElfIndexer.Client.Handlers;
 using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
 using AetherLink.Indexer.Entities;
+using AetherLink.Indexer.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.ObjectMapping;
@@ -35,7 +36,7 @@ public class RequestStartedLogEventProcessor : AElfLogEventProcessorBase<Request
     {
         _logger.LogDebug("[RequestStarted] RequestStarted chainId:{chainId}, requestId:{reqId}, blockHeight:{height}",
             context.ChainId, eventValue.RequestId.ToHex(), context.BlockHeight);
-        var indexId = IdGenerateHelper.GetOcrIndexId(context.ChainId, eventValue.RequestId.ToHex());
+        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.OcrPrefix, context.ChainId, eventValue.RequestId.ToHex());
         var ocrLogEventIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
         if (ocrLogEventIndex != null) return;
 

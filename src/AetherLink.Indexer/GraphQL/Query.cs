@@ -154,4 +154,28 @@ public class Query
             ? new RequestStartEpochDto()
             : objectMapper.Map<TransmittedIndex, RequestStartEpochDto>(result[0]);
     }
+
+    [Name("transactionEvents")]
+    public static async Task<List<TransactionEventDto>> TransactionEventQueryAsync(
+        [FromServices] IAElfIndexerClientEntityRepository<TransactionEventIndex, TransactionInfo> repository,
+        [FromServices] IObjectMapper objectMapper, TransactionEventQueryInput input)
+    {
+        var mustQuery = new List<Func<QueryContainerDescriptor<TransactionEventIndex>, QueryContainer>>
+            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
+
+        if (input.FromBlockHeight > 0)
+        {
+            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)));
+        }
+
+        if (input.ToBlockHeight > 0)
+        {
+            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight)));
+        }
+
+        QueryContainer Filter(QueryContainerDescriptor<TransactionEventIndex> f) => f.Bool(b => b.Must(mustQuery));
+
+        var (_, logs) = await repository.GetListAsync(Filter);
+        return objectMapper.Map<List<TransactionEventIndex>, List<TransactionEventDto>>(logs);
+    }
 }

@@ -3,6 +3,7 @@ using AElfIndexer.Client.Handlers;
 using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
 using AetherLink.Indexer.Entities;
+using AetherLink.Indexer.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.ObjectMapping;
@@ -35,7 +36,8 @@ public class RequestCancelledLogEventProcessor : AElfLogEventProcessorBase<Reque
     {
         _logger.LogDebug("[RequestCancelled] RequestCancelled chainId:{chainId}, requestId:{reqId}", context.ChainId,
             eventValue.RequestId.ToHex());
-        var indexId = IdGenerateHelper.GetRequestCancelIndexId(context.ChainId, eventValue.RequestId.ToHex());
+        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.RequestCancelPrefix, context.ChainId,
+            eventValue.RequestId.ToHex());
         var requestCancelledIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
         if (requestCancelledIndex != null) return;
 

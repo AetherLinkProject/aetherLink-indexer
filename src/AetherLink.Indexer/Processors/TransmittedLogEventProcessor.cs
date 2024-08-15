@@ -3,6 +3,7 @@ using AElfIndexer.Client.Handlers;
 using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
 using AetherLink.Indexer.Entities;
+using AetherLink.Indexer.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Volo.Abp.ObjectMapping;
@@ -35,8 +36,8 @@ public class TransmittedLogEventProcessor : AElfLogEventProcessorBase<Transmitte
     {
         _logger.LogDebug("[Transmitted] Transmitted chainId:{chainId}, requestId:{reqId}",
             context.ChainId, eventValue.RequestId.ToHex());
-        var indexId = IdGenerateHelper.GetTransmittedIndexId(context.ChainId, eventValue.RequestId.ToHex(),
-            eventValue.ConfigDigest.ToHex(), eventValue.EpochAndRound);
+        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.TransmittedPrefix, context.ChainId,
+            eventValue.RequestId.ToHex(), eventValue.ConfigDigest.ToHex(), eventValue.EpochAndRound);
         var transmittedIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
         if (transmittedIndex != null) return;
 
