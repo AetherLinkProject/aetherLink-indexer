@@ -3,9 +3,7 @@ using AElfIndexer.Client.Handlers;
 using AElfIndexer.Client.Providers;
 using AElfIndexer.Grains.State.Client;
 using AetherLink.Indexer.Entities;
-using AetherLink.Indexer.Options;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Orleans;
 using Volo.Abp.ObjectMapping;
 
@@ -22,13 +20,21 @@ public class AetherLinkTransactionHandler : TransactionDataHandler
         IDAppDataProvider dAppDataProvider, IBlockStateSetProvider<TransactionInfo> blockStateSetProvider,
         IDAppDataIndexManagerProvider dAppDataIndexManagerProvider, ILogger<AetherLinkTransactionHandler> logger,
         IEnumerable<IAElfLogEventProcessor<TransactionInfo>> processors, IObjectMapper objectMapper,
-        IAElfIndexerClientEntityRepository<TransactionEventIndex, TransactionInfo> repository,
-        IOptions<LogPollerOptions> options) : base(clusterClient, objectMapper, aelfIndexerClientInfoProvider,
-        dAppDataProvider, blockStateSetProvider, dAppDataIndexManagerProvider, processors, logger)
+        IAElfIndexerClientEntityRepository<TransactionEventIndex, TransactionInfo> repository) : base(clusterClient,
+        objectMapper, aelfIndexerClientInfoProvider, dAppDataProvider, blockStateSetProvider,
+        dAppDataIndexManagerProvider, processors, logger)
     {
         _repository = repository;
         _objectMapper = objectMapper;
-        _unprocessedEvents = new HashSet<string>(options.Value.UnprocessedEvents);
+        _unprocessedEvents = new()
+        {
+            "MiningInformationUpdated",
+            "ReceiptCreated",
+            "ProposalReleased",
+            "IrreversibleBlockFound",
+            "SecretSharingInformation",
+            "ProposalCreated"
+        };
     }
 
     protected override async Task ProcessTransactionsAsync(List<TransactionInfo> transactions)

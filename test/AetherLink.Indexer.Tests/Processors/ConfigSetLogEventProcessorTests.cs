@@ -18,13 +18,12 @@ namespace AetherLink.Indexer.Tests.Processors;
 
 public sealed class ConfigSetLogEventProcessorTests : AetherLinkIndexerDappTests
 {
-    private readonly IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> _repository;
     private readonly IObjectMapper _objectMapper;
+    private readonly IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> _repository;
 
     public ConfigSetLogEventProcessorTests()
     {
         _repository = GetRequiredService<IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo>>();
-
         _objectMapper = GetRequiredService<IObjectMapper>();
     }
 

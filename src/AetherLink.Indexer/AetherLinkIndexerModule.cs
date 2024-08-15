@@ -23,7 +23,6 @@ public class
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, TransmittedLogEventProcessor>();
         serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, RequestCancelledLogEventProcessor>();
         Configure<ContractInfoOptions>(configuration.GetSection("ContractInfo"));
-        Configure<LogPollerOptions>(configuration.GetSection("LogPoller"));
     }
 
     protected override string ClientId => "*";
