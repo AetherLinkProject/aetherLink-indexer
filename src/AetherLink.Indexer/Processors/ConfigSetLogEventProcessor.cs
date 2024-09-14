@@ -1,45 +1,31 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Logging;
+using AeFinder.Sdk.Processor;
 using AetherLink.Contracts.Oracle;
+using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using AetherLink.Indexer.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.Processors;
 
-public class ConfigSetLogEventProcessor : AElfLogEventProcessorBase<ConfigSet, LogEventInfo>
+public class ConfigSetLogEventProcessor : LogEventProcessorBase<ConfigSet>
 {
-    private readonly IObjectMapper _objectMapper;
-    private readonly ContractInfoOptions _contractInfoOptions;
-    private readonly ILogger<ConfigSetLogEventProcessor> _logger;
-    private readonly IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> _repository;
+    private readonly IAeFinderLogger _logger;
 
-    public ConfigSetLogEventProcessor(ILogger<ConfigSetLogEventProcessor> logger, IObjectMapper objectMapper,
-        IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> repository,
-        IOptions<ContractInfoOptions> contractInfoOptions) : base(logger)
+    public ConfigSetLogEventProcessor(IAeFinderLogger logger)
     {
-        _objectMapper = objectMapper;
-        _repository = repository;
         _logger = logger;
-        _contractInfoOptions = contractInfoOptions.Value;
     }
 
-    public override string GetContractAddress(string chainId)
-        => _contractInfoOptions.ContractInfos.First(c => c.ChainId == chainId).AetherLinkOracleContractAddress;
+    public override string GetContractAddress(string chainId) => ContractAddressHelper.GetContractAddress(chainId);
 
-    protected override async Task HandleEventAsync(ConfigSet eventValue, LogEventContext context)
+    public override async Task ProcessAsync(ConfigSet logEvent, LogEventContext context)
     {
         _logger.LogDebug("[ConfigSet] ConfigSet chainId:{chainId}", context.ChainId);
-        var configDigestIndex = new ConfigDigestIndex
-        {
-            Id = IdGenerateHelper.GetId(IdGenerateHelper.ConfigSetPrefix, context.ChainId),
-            ConfigDigest = eventValue.ConfigDigest.ToHex(),
-        };
 
-        _objectMapper.Map(context, configDigestIndex);
-        await _repository.AddOrUpdateAsync(configDigestIndex);
+        await SaveEntityAsync(new ConfigDigestIndex
+        {
+            Id = IdGenerateHelper.GetConfigSetId(context.ChainId),
+            ChainId = context.ChainId,
+            ConfigDigest = logEvent.ConfigDigest.ToHex(),
+        });
     }
 }

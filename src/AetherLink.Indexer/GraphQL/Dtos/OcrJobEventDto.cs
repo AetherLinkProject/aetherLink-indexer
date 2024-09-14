@@ -6,4 +6,5 @@ public class OcrJobEventDto : OracleBasicDto
     public string TransactionId { get; set; }
     public long StartTime { get; set; }
     public string Commitment { get; set; }
+    public string BlockHash { get; set; }
 }

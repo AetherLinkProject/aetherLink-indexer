@@ -1,50 +1,43 @@
+using AeFinder.Sdk;
 using AElf;
-using AElf.CSharp.Core.Extension;
 using AElf.Types;
-using AElfIndexer.Client;
-using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
+using aetherLink.indexer;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL;
-using AetherLink.Indexer.GraphQL.Input;
-using AetherLink.Indexer.Processors;
 using Google.Protobuf;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Shouldly;
 using Volo.Abp.ObjectMapping;
 using Xunit;
 
-namespace AetherLink.Indexer.Tests.Processors;
+namespace AetherLink.Indexer.Processors;
 
-public sealed class ConfigSetLogEventProcessorTests : AetherLinkIndexerDappTests
+public class ConfigSetLogEventProcessorTests : AetherLinkIndexerTestBase
 {
     private readonly IObjectMapper _objectMapper;
-    private readonly IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> _repository;
+    private readonly ConfigSetLogEventProcessor _processor;
+    private readonly IReadOnlyRepository<ConfigDigestIndex> _repository;
 
     public ConfigSetLogEventProcessorTests()
     {
-        _repository = GetRequiredService<IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo>>();
         _objectMapper = GetRequiredService<IObjectMapper>();
+        _processor = GetRequiredService<ConfigSetLogEventProcessor>();
+        _repository = GetRequiredService<IReadOnlyRepository<ConfigDigestIndex>>();
     }
 
     [Fact]
     public async Task Query_Test()
     {
         await MockConfigSet();
-        var result = await Query.OracleConfigDigestQueryAsync(_repository, _objectMapper,
-            new OracleConfigDigestInput
-            {
-                ChainId = "tDVW"
-            });
+        var result = await Query.OracleConfigDigestQueryAsync(_repository, _objectMapper, new() { ChainId = "AELF" });
         result.ConfigDigest.ShouldNotBeEmpty();
+        result.ChainId.ShouldBe("AELF");
     }
 
-    private async Task MockConfigSet(string chainId = "TEST", int height = 20)
+    private async Task MockConfigSet()
     {
-        var logEventContext = MockLogEventContext(height);
-        var blockStateSetKey = await MockBlockState(logEventContext);
-
-        var configSet = new ConfigSet
+        var logEvent = new ConfigSet
         {
             PreviousConfigBlockNumber = 1,
             ConfigDigest = HashHelper.ComputeFrom("default_config_digest"),
@@ -65,10 +58,9 @@ public sealed class ConfigSetLogEventProcessorTests : AetherLinkIndexerDappTests
             OffChainConfigVersion = 1,
             OffChainConfig = ByteString.Empty
         };
-        var logEventInfo = MockLogEventInfo(configSet.ToLogEvent());
-        var configSetLogEventProcessor = GetRequiredService<ConfigSetLogEventProcessor>();
-        await configSetLogEventProcessor.HandleEventAsync(logEventInfo, logEventContext);
-        configSetLogEventProcessor.GetContractAddress(chainId);
-        await BlockStateSetSaveDataAsync<LogEventInfo>(blockStateSetKey);
+
+        var logEventContext = GenerateLogEventContext(logEvent);
+        await _processor.ProcessAsync(logEvent, logEventContext);
+        _processor.GetContractAddress(logEventContext.ChainId);
     }
 }

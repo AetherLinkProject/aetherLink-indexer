@@ -1,55 +1,44 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Logging;
+using AeFinder.Sdk.Processor;
 using AetherLink.Contracts.Oracle;
+using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using AetherLink.Indexer.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.Processors;
 
-public class RequestStartedLogEventProcessor : AElfLogEventProcessorBase<RequestStarted, LogEventInfo>
+public class RequestStartedLogEventProcessor : LogEventProcessorBase<RequestStarted>
 {
-    private readonly IObjectMapper _objectMapper;
-    private readonly ContractInfoOptions _contractInfoOptions;
-    private readonly ILogger<RequestStartedLogEventProcessor> _logger;
-    private readonly IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> _repository;
+    private readonly IAeFinderLogger _logger;
 
-    public RequestStartedLogEventProcessor(ILogger<RequestStartedLogEventProcessor> logger,
-        IOptions<ContractInfoOptions> contractInfoOptions, IObjectMapper objectMapper,
-        IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository) : base(logger)
+    public RequestStartedLogEventProcessor(IAeFinderLogger logger)
     {
         _logger = logger;
-        _repository = repository;
-        _objectMapper = objectMapper;
-        _contractInfoOptions = contractInfoOptions.Value;
     }
 
-    public override string GetContractAddress(string chainId)
-    {
-        return _contractInfoOptions.ContractInfos.First(c => c.ChainId == chainId).AetherLinkOracleContractAddress;
-    }
+    public override string GetContractAddress(string chainId) => ContractAddressHelper.GetContractAddress(chainId);
 
-    protected override async Task HandleEventAsync(RequestStarted eventValue, LogEventContext context)
+    public override async Task ProcessAsync(RequestStarted logEvent, LogEventContext context)
     {
-        _logger.LogDebug("[RequestStarted] RequestStarted chainId:{chainId}, requestId:{reqId}, blockHeight:{height}",
-            context.ChainId, eventValue.RequestId.ToHex(), context.BlockHeight);
-        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.OcrPrefix, context.ChainId, eventValue.RequestId.ToHex());
-        var ocrLogEventIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
-        if (ocrLogEventIndex != null) return;
+        var chainId = context.ChainId;
+        var requestId = logEvent.RequestId.ToHex();
 
-        ocrLogEventIndex = new OcrJobEventIndex
+        _logger.LogDebug("[RequestStarted] chainId:{chainId}, requestId:{reqId}, blockHeight:{height}", chainId,
+            requestId, context.Block.BlockHeight);
+
+        var indexId = IdGenerateHelper.GetOcrId(chainId, requestId);
+        if (await GetEntityAsync<OcrJobEventIndex>(indexId) != null) return;
+
+        await SaveEntityAsync(new OcrJobEventIndex
         {
             Id = indexId,
-            TransactionId = context.TransactionId,
-            RequestId = eventValue.RequestId.ToHex(),
-            RequestTypeIndex = eventValue.RequestTypeIndex,
+            ChainId = context.ChainId,
+            BlockHeight = context.Block.BlockHeight,
+            BlockHash = context.Block.BlockHash,
+            RequestId = requestId,
+            RequestTypeIndex = logEvent.RequestTypeIndex,
+            TransactionId = context.Transaction.TransactionId,
             StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
-            Commitment = eventValue.Commitment.ToBase64()
-        };
-        _objectMapper.Map(context, ocrLogEventIndex);
-        await _repository.AddOrUpdateAsync(ocrLogEventIndex);
+            Commitment = logEvent.Commitment.ToBase64()
+        });
     }
 }

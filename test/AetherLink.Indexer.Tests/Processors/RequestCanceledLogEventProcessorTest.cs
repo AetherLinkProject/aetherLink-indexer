@@ -1,57 +1,52 @@
+using AeFinder.Sdk;
+using AeFinder.Sdk.Processor;
 using AElf;
-using AElf.CSharp.Core.Extension;
-using AElfIndexer.Client;
-using AElfIndexer.Grains.State.Client;
 using AetherLink.Contracts.Oracle;
+using aetherLink.indexer;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL;
 using AetherLink.Indexer.GraphQL.Input;
-using AetherLink.Indexer.Processors;
 using Shouldly;
 using Volo.Abp.ObjectMapping;
 using Xunit;
 
-namespace AetherLink.Indexer.Tests.Processors;
+namespace AetherLink.Indexer.Processors;
 
-public sealed class RequestCanceledLogEventProcessorTest : AetherLinkIndexerDappTests
+public sealed class RequestCanceledLogEventProcessorTest : AetherLinkIndexerTestBase
 {
-    private readonly IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo> _repository;
     private readonly IObjectMapper _objectMapper;
+    private readonly RequestCancelledLogEventProcessor _processor;
+    private readonly IReadOnlyRepository<RequestCancelledIndex> _repository;
 
     public RequestCanceledLogEventProcessorTest()
     {
-        _repository = GetRequiredService<IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo>>();
         _objectMapper = GetRequiredService<IObjectMapper>();
+        _processor = GetRequiredService<RequestCancelledLogEventProcessor>();
+        _repository = GetRequiredService<IReadOnlyRepository<RequestCancelledIndex>>();
     }
 
     [Fact]
     public async Task Query_Test()
     {
-        await MockRequestCanceled();
+        var ctx = await MockRequestCanceled();
         var result = await Query.RequestCancelledQueryAsync(_repository, _objectMapper,
             new RequestCancelledInput
             {
+                ChainId = "AELF",
                 FromBlockHeight = 10,
-                ToBlockHeight = 200,
+                ToBlockHeight = 200
             });
         result.Count.ShouldBe(1);
+        result.First().RequestId.ShouldBe(HashHelper.ComputeFrom("test_request_id").ToHex());
+        result.First().ChainId.ShouldBe("AELF");
+        result.First().BlockHeight.ShouldBe(ctx.Block.BlockHeight);
     }
 
-    private async Task MockRequestCanceled(string chainId = "TEST", long blockHeight = 20,
-        string requestId = "test_request_id")
+    private async Task<LogEventContext> MockRequestCanceled()
     {
-        var logEventContext = MockLogEventContext(blockHeight);
-        var blockStateSetKey = await MockBlockState(logEventContext);
-
-        var requestStarted = new RequestCancelled
-        {
-            RequestId = HashHelper.ComputeFrom(requestId)
-        };
-
-        var logEventInfo = MockLogEventInfo(requestStarted.ToLogEvent());
-        var requestCanceledLogEventProcessor = GetRequiredService<RequestCancelledLogEventProcessor>();
-        await requestCanceledLogEventProcessor.HandleEventAsync(logEventInfo, logEventContext);
-        requestCanceledLogEventProcessor.GetContractAddress(chainId);
-        await BlockStateSetSaveDataAsync<LogEventInfo>(blockStateSetKey);
+        var logEvent = new RequestCancelled { RequestId = HashHelper.ComputeFrom("test_request_id") };
+        var context = GenerateLogEventContext(logEvent);
+        await _processor.ProcessAsync(logEvent, context);
+        return context;
     }
 }

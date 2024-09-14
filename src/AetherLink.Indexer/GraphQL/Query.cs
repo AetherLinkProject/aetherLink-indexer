@@ -1,181 +1,112 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Providers;
-using AElfIndexer.Grains;
-using AElfIndexer.Grains.Grain.Client;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL.Dtos;
 using AetherLink.Indexer.GraphQL.Input;
 using GraphQL;
-using Nest;
-using Orleans;
 using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.GraphQL;
 
 public class Query
 {
-    [Name("syncState")]
-    public static async Task<SyncStateDto> SyncState([FromServices] IClusterClient clusterClient,
-        [FromServices] IAElfIndexerClientInfoProvider clientInfoProvider, SyncStateInput input)
-    {
-        var version = clientInfoProvider.GetVersion();
-        var clientId = clientInfoProvider.GetClientId();
-        var blockStateSetInfoGrain = clusterClient.GetGrain<IBlockStateSetInfoGrain>(
-            GrainIdHelper.GenerateGrainId("BlockStateSetInfo", clientId, input.ChainId, version));
-        return new SyncStateDto
-        {
-            ConfirmedBlockHeight = await blockStateSetInfoGrain.GetConfirmedBlockHeight(input.FilterType)
-        };
-    }
-
     [Name("ocrJobEvents")]
     public static async Task<List<OcrJobEventDto>> OcrJobEventsQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, OcrLogEventInput input)
+        [FromServices] IReadOnlyRepository<OcrJobEventIndex> repository, [FromServices] IObjectMapper objectMapper,
+        OcrLogEventInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        if (input.FromBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)));
-        }
-
-        if (input.ToBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight)));
-        }
-
-        QueryContainer Filter(QueryContainerDescriptor<OcrJobEventIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var (_, logs) = await repository.GetListAsync(Filter);
-        return objectMapper.Map<List<OcrJobEventIndex>, List<OcrJobEventDto>>(logs);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<OcrJobEventIndex>, List<OcrJobEventDto>>(queryable.ToList());
     }
 
     [Name("transmitted")]
     public static async Task<List<TransmittedDto>> TransmittedQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, TransmittedInput input)
+        [FromServices] IReadOnlyRepository<TransmittedIndex> repository, [FromServices] IObjectMapper objectMapper,
+        TransmittedInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        if (input.FromBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)));
-        }
-
-        if (input.ToBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight)));
-        }
-
-        QueryContainer Filter(QueryContainerDescriptor<TransmittedIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var (_, logs) = await repository.GetListAsync(Filter);
-        return objectMapper.Map<List<TransmittedIndex>, List<TransmittedDto>>(logs);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<TransmittedIndex>, List<TransmittedDto>>(queryable.ToList());
     }
 
     [Name("requestCancelled")]
     public static async Task<List<RequestCancelledDto>> RequestCancelledQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, RequestCancelledInput input)
+        [FromServices] IReadOnlyRepository<RequestCancelledIndex> repository, [FromServices] IObjectMapper objectMapper,
+        RequestCancelledInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<RequestCancelledIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        if (input.FromBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)));
-        }
-
-        if (input.ToBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight)));
-        }
-
-        QueryContainer Filter(QueryContainerDescriptor<RequestCancelledIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var (_, logs) = await repository.GetListAsync(Filter);
-        return objectMapper.Map<List<RequestCancelledIndex>, List<RequestCancelledDto>>(logs);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<RequestCancelledIndex>, List<RequestCancelledDto>>(queryable.ToList());
     }
-
 
     [Name("requestCommitment")]
     public static async Task<CommitmentDto> RequestCommitmentQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, RequestCommitmentInput input)
+        [FromServices] IReadOnlyRepository<OcrJobEventIndex> repository, [FromServices] IObjectMapper objectMapper,
+        RequestCommitmentInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<OcrJobEventIndex>, QueryContainer>>
-        {
-            q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)),
-            q => q.Term(i => i.Field(f => f.RequestId).Value(input.RequestId))
-        };
-
-        QueryContainer Filter(QueryContainerDescriptor<OcrJobEventIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var commitment = await repository.GetAsync(Filter);
-        return objectMapper.Map<OcrJobEventIndex, CommitmentDto>(commitment);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId && a.RequestId == input.RequestId);
+        var result = queryable.FirstOrDefault();
+        return result != null
+            ? objectMapper.Map<OcrJobEventIndex, CommitmentDto>(result)
+            : new();
     }
 
     [Name("oracleConfigDigest")]
     public static async Task<ConfigDigestDto> OracleConfigDigestQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<ConfigDigestIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, OracleConfigDigestInput input)
+        [FromServices] IReadOnlyRepository<ConfigDigestIndex> repository, [FromServices] IObjectMapper objectMapper,
+        OracleConfigDigestInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<ConfigDigestIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        QueryContainer Filter(QueryContainerDescriptor<ConfigDigestIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var result = await repository.GetAsync(Filter);
-        return objectMapper.Map<ConfigDigestIndex, ConfigDigestDto>(result);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId);
+        var result = queryable.FirstOrDefault();
+        return result != null
+            ? objectMapper.Map<ConfigDigestIndex, ConfigDigestDto>(result)
+            : new();
     }
 
     [Name("oracleLatestEpoch")]
     public static async Task<RequestStartEpochDto> OracleLatestEpochQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
-        [FromServices] IObjectMapper objectMapper, RequestStartEpochQueryInput input)
+        [FromServices] IReadOnlyRepository<TransmittedIndex> repository, [FromServices] IObjectMapper objectMapper,
+        RequestStartEpochQueryInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<TransmittedIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        if (input.BlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.BlockHeight)));
-        }
-
-        QueryContainer Filter(QueryContainerDescriptor<TransmittedIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var (count, result) =
-            await repository.GetListAsync(Filter, sortType: SortOrder.Descending, sortExp: k => k.BlockHeight);
-        return count < 1
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.BlockHeight);
+        var results = queryable.ToList().OrderByDescending(r => r.BlockHeight);
+        // var results = queryable.OrderByDescending(r => r.Block.BlockHeight);
+        return !results.Any()
             ? new RequestStartEpochDto()
-            : objectMapper.Map<TransmittedIndex, RequestStartEpochDto>(result[0]);
+            : objectMapper.Map<TransmittedIndex, RequestStartEpochDto>(results.First());
     }
 
     [Name("transactionEvents")]
     public static async Task<List<TransactionEventDto>> TransactionEventQueryAsync(
-        [FromServices] IAElfIndexerClientEntityRepository<TransactionEventIndex, TransactionInfo> repository,
+        [FromServices] IReadOnlyRepository<TransactionEventIndex> repository, [FromServices] IObjectMapper objectMapper,
+        TransactionEventQueryInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<TransactionEventIndex>, List<TransactionEventDto>>(queryable.ToList());
+    }
+
+    [Name("rampRequests")]
+    public static async Task<List<RampRequestDto>> RampRequestQueryAsync(
+        [FromServices] IReadOnlyRepository<RampSendRequestedIndex> repository,
         [FromServices] IObjectMapper objectMapper, TransactionEventQueryInput input)
     {
-        var mustQuery = new List<Func<QueryContainerDescriptor<TransactionEventIndex>, QueryContainer>>
-            { q => q.Term(i => i.Field(f => f.ChainId).Value(input.ChainId)) };
-
-        if (input.FromBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).GreaterThanOrEquals(input.FromBlockHeight)));
-        }
-
-        if (input.ToBlockHeight > 0)
-        {
-            mustQuery.Add(q => q.Range(i => i.Field(f => f.BlockHeight).LessThanOrEquals(input.ToBlockHeight)));
-        }
-
-        QueryContainer Filter(QueryContainerDescriptor<TransactionEventIndex> f) => f.Bool(b => b.Must(mustQuery));
-
-        var (_, logs) = await repository.GetListAsync(Filter);
-        return objectMapper.Map<List<TransactionEventIndex>, List<TransactionEventDto>>(logs);
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<RampSendRequestedIndex>, List<RampRequestDto>>(queryable.ToList());
     }
 }

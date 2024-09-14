@@ -1,53 +1,38 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Logging;
+using AeFinder.Sdk.Processor;
 using AetherLink.Contracts.Oracle;
+using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using AetherLink.Indexer.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.Processors;
 
-public class RequestCancelledLogEventProcessor : AElfLogEventProcessorBase<RequestCancelled, LogEventInfo>
+public class RequestCancelledLogEventProcessor : LogEventProcessorBase<RequestCancelled>
 {
-    private readonly IObjectMapper _objectMapper;
-    private readonly ContractInfoOptions _contractInfoOptions;
-    private readonly ILogger<RequestCancelledLogEventProcessor> _logger;
-    private readonly IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo> _repository;
+    private readonly IAeFinderLogger _logger;
 
-    public RequestCancelledLogEventProcessor(ILogger<RequestCancelledLogEventProcessor> logger,
-        IOptions<ContractInfoOptions> contractInfoOptions, IObjectMapper objectMapper,
-        IAElfIndexerClientEntityRepository<RequestCancelledIndex, LogEventInfo> repository) : base(logger)
+    public RequestCancelledLogEventProcessor(IAeFinderLogger logger)
     {
         _logger = logger;
-        _repository = repository;
-        _objectMapper = objectMapper;
-        _contractInfoOptions = contractInfoOptions.Value;
     }
 
-    public override string GetContractAddress(string chainId)
-    {
-        return _contractInfoOptions.ContractInfos.First(c => c.ChainId == chainId).AetherLinkOracleContractAddress;
-    }
+    public override string GetContractAddress(string chainId) => ContractAddressHelper.GetContractAddress(chainId);
 
-    protected override async Task HandleEventAsync(RequestCancelled eventValue, LogEventContext context)
+    public override async Task ProcessAsync(RequestCancelled logEvent, LogEventContext context)
     {
-        _logger.LogDebug("[RequestCancelled] RequestCancelled chainId:{chainId}, requestId:{reqId}", context.ChainId,
-            eventValue.RequestId.ToHex());
-        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.RequestCancelPrefix, context.ChainId,
-            eventValue.RequestId.ToHex());
-        var requestCancelledIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
-        if (requestCancelledIndex != null) return;
+        var chainId = context.ChainId;
+        var requestId = logEvent.RequestId.ToHex();
 
-        requestCancelledIndex = new RequestCancelledIndex
+        _logger.LogDebug("[RequestCancelled] chainId:{chainId}, requestId:{reqId}", chainId, requestId);
+
+        var indexId = IdGenerateHelper.GetRequestCancelId(chainId, requestId);
+        if (await GetEntityAsync<RequestCancelledIndex>(indexId) != null) return;
+
+        await SaveEntityAsync(new RequestCancelledIndex
         {
             Id = indexId,
-            RequestId = eventValue.RequestId.ToHex(),
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds()
-        };
-        _objectMapper.Map(context, requestCancelledIndex);
-        await _repository.AddOrUpdateAsync(requestCancelledIndex);
+            ChainId = context.ChainId,
+            RequestId = requestId,
+            BlockHeight = context.Block.BlockHeight,
+        });
     }
 }
