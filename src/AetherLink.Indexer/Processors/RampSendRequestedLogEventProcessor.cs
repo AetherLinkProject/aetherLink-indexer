@@ -31,6 +31,8 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
         await SaveEntityAsync(new RampSendRequestedIndex
         {
             Id = indexId,
+            ChainId = context.ChainId,
+            BlockHeight = context.Block.BlockHeight,
             MessageId = messageId,
             TargetChainId = logEvent.TargetChainId,
             SourceChainId = ChainHelper.ConvertBase58ToChainId(context.ChainId),

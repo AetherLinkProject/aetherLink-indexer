@@ -20,6 +20,7 @@ public class AetherLinkIndexerModule : AbpModule
         context.Services.AddTransient<ILogEventProcessor, ConfigSetLogEventProcessor>();
         context.Services.AddTransient<ILogEventProcessor, TransmittedLogEventProcessor>();
         context.Services.AddTransient<ILogEventProcessor, RequestCancelledLogEventProcessor>();
+        context.Services.AddTransient<ILogEventProcessor, RampSendRequestedLogEventProcessor>();
         context.Services.AddTransient<ITransactionProcessor, TransactionProcessor>();
         context.Services.AddTransient<IBlockProcessor, BlockProcessor>();
     }

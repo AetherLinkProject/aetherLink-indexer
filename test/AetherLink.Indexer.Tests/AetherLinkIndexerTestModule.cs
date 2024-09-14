@@ -17,11 +17,12 @@ public class AetherLinkIndexerTestModule : AbpModule
         Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<AetherLinkIndexerModule>(); });
 
         // Add your Processors.
-        context.Services.AddSingleton<ConfigSetLogEventProcessor>();
+        context.Services.AddSingleton<RampSendRequestedLogEventProcessor>();
         context.Services.AddSingleton<RequestCancelledLogEventProcessor>();
         context.Services.AddSingleton<RequestStartedLogEventProcessor>();
         context.Services.AddSingleton<TransmittedLogEventProcessor>();
-        context.Services.AddSingleton<TransactionProcessor>();
+        context.Services.AddSingleton<ConfigSetLogEventProcessor>();
         context.Services.AddSingleton<TransactionEventProvider>();
+        context.Services.AddSingleton<TransactionProcessor>();
     }
 }

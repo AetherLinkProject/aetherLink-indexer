@@ -104,6 +104,7 @@ public class Query
         [FromServices] IObjectMapper objectMapper, TransactionEventQueryInput input)
     {
         var queryable = await repository.GetQueryableAsync();
+        var temp = queryable.ToList();
         queryable = queryable.Where(a => a.ChainId == input.ChainId
                                          && a.BlockHeight <= input.ToBlockHeight
                                          && a.BlockHeight >= input.FromBlockHeight);
