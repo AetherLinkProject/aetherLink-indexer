@@ -54,28 +54,30 @@ namespace AetherLink.Contracts.Ramp {
             "b21taXRSZXBvcnRBY2NlcHRlZBIeCgptZXNzYWdlX2lkGAEgASgLMgouYWVs",
             "Zi5IYXNoEhcKD3NvdXJjZV9jaGFpbl9pZBgCIAEoAxIXCg90YXJnZXRfY2hh",
             "aW5faWQYAyABKAMSDgoGc2VuZGVyGAQgASgMEh8KCHJlY2VpdmVyGAUgASgL",
-            "Mg0uYWVsZi5BZGRyZXNzEg4KBnJlcG9ydBgGIAEoDDoEoLsYASJ+Cg1TZW5k",
-            "UmVxdWVzdGVkEh4KCm1lc3NhZ2VfaWQYASABKAsyCi5hZWxmLkhhc2gSFwoP",
-            "dGFyZ2V0X2NoYWluX2lkGAIgASgDEhAKCHJlY2VpdmVyGAMgASgMEg4KBnNl",
-            "bmRlchgEIAEoDBIMCgRkYXRhGAUgASgMOgSguxgBMvAFCgxSYW1wQ29udHJh",
-            "Y3QSPQoKSW5pdGlhbGl6ZRIVLnJhbXAuSW5pdGlhbGl6ZUlucHV0GhYuZ29v",
-            "Z2xlLnByb3RvYnVmLkVtcHR5IgASMwoJU2V0Q29uZmlnEgwucmFtcC5Db25m",
-            "aWcaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABI4CglHZXRDb25maWcSFi5n",
-            "b29nbGUucHJvdG9idWYuRW1wdHkaDC5yYW1wLkNvbmZpZyIFiIn3AQESOAoI",
-            "R2V0QWRtaW4SFi5nb29nbGUucHJvdG9idWYuRW1wdHkaDS5hZWxmLkFkZHJl",
-            "c3MiBYiJ9wEBEkMKGFNldE9yYWNsZUNvbnRyYWN0QWRkcmVzcxINLmFlbGYu",
-            "QWRkcmVzcxoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEkgKGEdldE9yYWNs",
-            "ZUNvbnRyYWN0QWRkcmVzcxIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoNLmFl",
-            "bGYuQWRkcmVzcyIFiIn3AQESQwoNQWRkUmFtcFNlbmRlchIYLnJhbXAuQWRk",
-            "UmFtcFNlbmRlcklucHV0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgASOwoQ",
-            "UmVtb3ZlUmFtcFNlbmRlchINLmFlbGYuQWRkcmVzcxoWLmdvb2dsZS5wcm90",
-            "b2J1Zi5FbXB0eSIAEjsKDUdldFJhbXBTZW5kZXISDS5hZWxmLkFkZHJlc3Ma",
-            "FC5yYW1wLlJhbXBTZW5kZXJJbmZvIgWIifcBARIxCgRTZW5kEg8ucmFtcC5T",
-            "ZW5kSW5wdXQaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABI1CgZDb21taXQS",
-            "ES5yYW1wLkNvbW1pdElucHV0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgAa",
-            "QMrK9gELYWNzMTIucHJvdG+yzPYBK0FldGhlckxpbmsuQ29udHJhY3RzLlJh",
-            "bXAuUmFtcENvbnRyYWN0U3RhdGVCHKoCGUFldGhlckxpbmsuQ29udHJhY3Rz",
-            "LlJhbXBiBnByb3RvMw=="));
+            "Mg0uYWVsZi5BZGRyZXNzEg4KBnJlcG9ydBgGIAEoDDoEoLsYASKNAQoNU2Vu",
+            "ZFJlcXVlc3RlZBIeCgptZXNzYWdlX2lkGAEgASgLMgouYWVsZi5IYXNoEhcK",
+            "D3RhcmdldF9jaGFpbl9pZBgCIAEoAxIQCghyZWNlaXZlchgDIAEoDBIOCgZz",
+            "ZW5kZXIYBCABKAwSDAoEZGF0YRgFIAEoDBINCgVlcG9jaBgGIAEoAzoEoLsY",
+            "ATK+BgoMUmFtcENvbnRyYWN0Ej0KCkluaXRpYWxpemUSFS5yYW1wLkluaXRp",
+            "YWxpemVJbnB1dBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEjMKCVNldENv",
+            "bmZpZxIMLnJhbXAuQ29uZmlnGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgAS",
+            "OAoJR2V0Q29uZmlnEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GgwucmFtcC5D",
+            "b25maWciBYiJ9wEBEjgKCEdldEFkbWluEhYuZ29vZ2xlLnByb3RvYnVmLkVt",
+            "cHR5Gg0uYWVsZi5BZGRyZXNzIgWIifcBARJDChhTZXRPcmFjbGVDb250cmFj",
+            "dEFkZHJlc3MSDS5hZWxmLkFkZHJlc3MaFi5nb29nbGUucHJvdG9idWYuRW1w",
+            "dHkiABJIChhHZXRPcmFjbGVDb250cmFjdEFkZHJlc3MSFi5nb29nbGUucHJv",
+            "dG9idWYuRW1wdHkaDS5hZWxmLkFkZHJlc3MiBYiJ9wEBEkMKDUFkZFJhbXBT",
+            "ZW5kZXISGC5yYW1wLkFkZFJhbXBTZW5kZXJJbnB1dBoWLmdvb2dsZS5wcm90",
+            "b2J1Zi5FbXB0eSIAEjsKEFJlbW92ZVJhbXBTZW5kZXISDS5hZWxmLkFkZHJl",
+            "c3MaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABI7Cg1HZXRSYW1wU2VuZGVy",
+            "Eg0uYWVsZi5BZGRyZXNzGhQucmFtcC5SYW1wU2VuZGVySW5mbyIFiIn3AQES",
+            "TAoOR2V0TGF0ZXN0RXBvY2gSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5n",
+            "b29nbGUucHJvdG9idWYuSW50NjRWYWx1ZSIFiIn3AQESMQoEU2VuZBIPLnJh",
+            "bXAuU2VuZElucHV0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgASNQoGQ29t",
+            "bWl0EhEucmFtcC5Db21taXRJbnB1dBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0",
+            "eSIAGkDKyvYBC2FjczEyLnByb3Rvssz2AStBZXRoZXJMaW5rLkNvbnRyYWN0",
+            "cy5SYW1wLlJhbXBDb250cmFjdFN0YXRlQhyqAhlBZXRoZXJMaW5rLkNvbnRy",
+            "YWN0cy5SYW1wYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::AElf.Types.CoreReflection.Descriptor, global::AElf.OptionsReflection.Descriptor, global::AElf.Standards.ACS12.Acs12Reflection.Descriptor, global::Oracle.OracleCommonMessageReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -92,7 +94,7 @@ namespace AetherLink.Contracts.Ramp {
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RampSenderAdded), global::AetherLink.Contracts.Ramp.RampSenderAdded.Parser, new[]{ "SenderAddress" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RampSenderRemoved), global::AetherLink.Contracts.Ramp.RampSenderRemoved.Parser, new[]{ "SenderAddress" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.CommitReportAccepted), global::AetherLink.Contracts.Ramp.CommitReportAccepted.Parser, new[]{ "MessageId", "SourceChainId", "TargetChainId", "Sender", "Receiver", "Report" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendRequested), global::AetherLink.Contracts.Ramp.SendRequested.Parser, new[]{ "MessageId", "TargetChainId", "Receiver", "Sender", "Data" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendRequested), global::AetherLink.Contracts.Ramp.SendRequested.Parser, new[]{ "MessageId", "TargetChainId", "Receiver", "Sender", "Data", "Epoch" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3499,6 +3501,7 @@ namespace AetherLink.Contracts.Ramp {
       receiver_ = other.receiver_;
       sender_ = other.sender_;
       data_ = other.data_;
+      epoch_ = other.epoch_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3568,6 +3571,18 @@ namespace AetherLink.Contracts.Ramp {
       }
     }
 
+    /// <summary>Field number for the "epoch" field.</summary>
+    public const int EpochFieldNumber = 6;
+    private long epoch_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Epoch {
+      get { return epoch_; }
+      set {
+        epoch_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3588,6 +3603,7 @@ namespace AetherLink.Contracts.Ramp {
       if (Receiver != other.Receiver) return false;
       if (Sender != other.Sender) return false;
       if (Data != other.Data) return false;
+      if (Epoch != other.Epoch) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3600,6 +3616,7 @@ namespace AetherLink.Contracts.Ramp {
       if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (Sender.Length != 0) hash ^= Sender.GetHashCode();
       if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Epoch != 0L) hash ^= Epoch.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3638,6 +3655,10 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(42);
         output.WriteBytes(Data);
       }
+      if (Epoch != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(Epoch);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3668,6 +3689,10 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(42);
         output.WriteBytes(Data);
       }
+      if (Epoch != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(Epoch);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3692,6 +3717,9 @@ namespace AetherLink.Contracts.Ramp {
       }
       if (Data.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (Epoch != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Epoch);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3722,6 +3750,9 @@ namespace AetherLink.Contracts.Ramp {
       }
       if (other.Data.Length != 0) {
         Data = other.Data;
+      }
+      if (other.Epoch != 0L) {
+        Epoch = other.Epoch;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3761,6 +3792,10 @@ namespace AetherLink.Contracts.Ramp {
             Data = input.ReadBytes();
             break;
           }
+          case 48: {
+            Epoch = input.ReadInt64();
+            break;
+          }
         }
       }
     #endif
@@ -3797,6 +3832,10 @@ namespace AetherLink.Contracts.Ramp {
           }
           case 42: {
             Data = input.ReadBytes();
+            break;
+          }
+          case 48: {
+            Epoch = input.ReadInt64();
             break;
           }
         }

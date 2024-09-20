@@ -108,6 +108,7 @@ namespace AetherLink.Contracts.Ramp {
         Receiver = Receiver,
         Sender = Sender,
         Data = Data,
+        Epoch = Epoch,
       };
     }
   }
@@ -124,6 +125,7 @@ namespace AetherLink.Contracts.Ramp {
     static readonly aelf::Marshaller<global::AElf.Types.Address> __Marshaller_aelf_Address = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Types.Address.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Ramp.AddRampSenderInput> __Marshaller_ramp_AddRampSenderInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Ramp.AddRampSenderInput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Ramp.RampSenderInfo> __Marshaller_ramp_RampSenderInfo = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Ramp.RampSenderInfo.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::Google.Protobuf.WellKnownTypes.Int64Value> __Marshaller_google_protobuf_Int64Value = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Int64Value.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Ramp.SendInput> __Marshaller_ramp_SendInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Ramp.SendInput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::AetherLink.Contracts.Ramp.CommitInput> __Marshaller_ramp_CommitInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AetherLink.Contracts.Ramp.CommitInput.Parser.ParseFrom);
     #endregion
@@ -191,6 +193,13 @@ namespace AetherLink.Contracts.Ramp {
         "GetRampSender",
         __Marshaller_aelf_Address,
         __Marshaller_ramp_RampSenderInfo);
+
+    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Int64Value> __Method_GetLatestEpoch = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Google.Protobuf.WellKnownTypes.Int64Value>(
+        aelf::MethodType.View,
+        __ServiceName,
+        "GetLatestEpoch",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_google_protobuf_Int64Value);
 
     static readonly aelf::Method<global::AetherLink.Contracts.Ramp.SendInput, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Send = new aelf::Method<global::AetherLink.Contracts.Ramp.SendInput, global::Google.Protobuf.WellKnownTypes.Empty>(
         aelf::MethodType.Action,
@@ -275,6 +284,11 @@ namespace AetherLink.Contracts.Ramp {
     //     throw new global::System.NotImplementedException();
     //   }
     //
+    //   public virtual global::Google.Protobuf.WellKnownTypes.Int64Value GetLatestEpoch(global::Google.Protobuf.WellKnownTypes.Empty input)
+    //   {
+    //     throw new global::System.NotImplementedException();
+    //   }
+    //
     //   public virtual global::Google.Protobuf.WellKnownTypes.Empty Send(global::AetherLink.Contracts.Ramp.SendInput input)
     //   {
     //     throw new global::System.NotImplementedException();
@@ -300,6 +314,7 @@ namespace AetherLink.Contracts.Ramp {
     //       .AddMethod(__Method_AddRampSender, serviceImpl.AddRampSender)
     //       .AddMethod(__Method_RemoveRampSender, serviceImpl.RemoveRampSender)
     //       .AddMethod(__Method_GetRampSender, serviceImpl.GetRampSender)
+    //       .AddMethod(__Method_GetLatestEpoch, serviceImpl.GetLatestEpoch)
     //       .AddMethod(__Method_Send, serviceImpl.Send)
     //       .AddMethod(__Method_Commit, serviceImpl.Commit).Build();
     // }

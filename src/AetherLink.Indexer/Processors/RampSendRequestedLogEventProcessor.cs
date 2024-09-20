@@ -38,7 +38,8 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
             SourceChainId = ChainHelper.ConvertBase58ToChainId(context.ChainId),
             Sender = logEvent.Sender.ToBase64(),
             Receiver = logEvent.Receiver.ToBase64(),
-            Data = logEvent.Data.ToBase64()
+            Data = logEvent.Data.ToBase64(),
+            Epoch = logEvent.Epoch
         });
     }
 }

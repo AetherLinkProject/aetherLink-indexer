@@ -41,9 +41,9 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result.First().TargetChainId.ShouldBe(13);
         result.First().Data.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
         result.First().BlockHeight.ShouldBe(ctx1.Block.BlockHeight);
-        
-        
-        var ctx2 = await MockSendRequested("test_message_id_2");
+        result.First().Epoch.ShouldBe(0);
+
+        var ctx2 = await MockSendRequested("test_message_id_2", 1);
         var result2 = await Query.RampRequestQueryAsync(_repository, _objectMapper,
             new() { ChainId = "AELF", FromBlockHeight = 10, ToBlockHeight = 200 });
         result2.Count.ShouldBe(2);
@@ -54,20 +54,10 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result2[1].TargetChainId.ShouldBe(13);
         result2[1].Data.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
         result2[1].BlockHeight.ShouldBe(ctx2.Block.BlockHeight);
-
-        // var ctx2 = await MockRequestStarted(requestId: "test_request_id_2");
-        // var result2 = await Query.OcrJobEventsQueryAsync(_repository, _objectMapper,
-        //     new() { ChainId = "AELF", FromBlockHeight = 10, ToBlockHeight = 200 });
-        // result2.Count.ShouldBe(2);
-        // result2[1].ChainId.ShouldBe("AELF");
-        // result2[1].Commitment.ShouldBe(HashHelper.ComputeFrom("Commitment").ToByteString().ToBase64());
-        // result2[1].RequestId.ShouldBe(HashHelper.ComputeFrom("test_request_id_2").ToHex());
-        // result2[1].RequestTypeIndex.ShouldBe(1);
-        // result2[1].BlockHeight.ShouldBe(ctx2.Block.BlockHeight);
-        // result2[1].BlockHash.ShouldBe(ctx2.Block.BlockHash);
+        result2[1].Epoch.ShouldBe(1);
     }
 
-    private async Task<LogEventContext> MockSendRequested(string messageId = "test_message_id")
+    private async Task<LogEventContext> MockSendRequested(string messageId = "test_message_id", long epoch = 0)
     {
         var logEvent = new SendRequested
         {
@@ -75,7 +65,8 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
             TargetChainId = 13,
             Receiver = Address.FromPublicKey("AAA".HexToByteArray()).ToByteString(),
             Sender = Address.FromPublicKey("BBB".HexToByteArray()).ToByteString(),
-            Data = HashHelper.ComputeFrom("Message Data").ToByteString()
+            Data = HashHelper.ComputeFrom("Message Data").ToByteString(),
+            Epoch = epoch
         };
 
         var context = GenerateLogEventContext(logEvent);

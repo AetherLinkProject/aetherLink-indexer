@@ -13,4 +13,5 @@ public class RampSendRequestedIndex : AeFinderEntity, IAeFinderEntity
     [Keyword] public string Sender { get; set; }
     [Keyword] public string Receiver { get; set; }
     [Keyword] public string Data { get; set; }
+    public long Epoch { get; set; }
 }
