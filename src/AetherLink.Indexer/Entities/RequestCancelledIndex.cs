@@ -1,11 +1,11 @@
-using AElf.Indexing.Elasticsearch;
-using AElfIndexer.Client;
+using AeFinder.Sdk.Entities;
 using Nest;
 
 namespace AetherLink.Indexer.Entities;
 
-public class RequestCancelledIndex : AElfIndexerClientEntity<string>, IIndexBuild
+public class RequestCancelledIndex : AeFinderEntity, IAeFinderEntity
 {
+    [Keyword] public string ChainId { get; set; }
     [Keyword] public string RequestId { get; set; }
-    public long StartTime { get; set; }
+    public long BlockHeight { get; set; }
 }

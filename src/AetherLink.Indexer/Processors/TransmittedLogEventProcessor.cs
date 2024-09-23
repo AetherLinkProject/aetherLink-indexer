@@ -1,54 +1,41 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Logging;
+using AeFinder.Sdk.Processor;
 using AetherLink.Contracts.Oracle;
+using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using AetherLink.Indexer.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.Processors;
 
-public class TransmittedLogEventProcessor : AElfLogEventProcessorBase<Transmitted, LogEventInfo>
+public class TransmittedLogEventProcessor : LogEventProcessorBase<Transmitted>
 {
-    private readonly IObjectMapper _objectMapper;
-    private readonly ContractInfoOptions _contractInfoOptions;
-    private readonly ILogger<TransmittedLogEventProcessor> _logger;
-    private readonly IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> _repository;
+    private readonly IAeFinderLogger _logger;
 
-    public TransmittedLogEventProcessor(IAElfIndexerClientEntityRepository<TransmittedIndex, LogEventInfo> repository,
-        ILogger<TransmittedLogEventProcessor> logger, IOptions<ContractInfoOptions> contractInfoOptions,
-        IObjectMapper objectMapper) : base(logger)
+    public TransmittedLogEventProcessor(IAeFinderLogger logger)
     {
         _logger = logger;
-        _repository = repository;
-        _objectMapper = objectMapper;
-        _contractInfoOptions = contractInfoOptions.Value;
     }
 
-    public override string GetContractAddress(string chainId)
-    {
-        return _contractInfoOptions.ContractInfos.First(c => c.ChainId == chainId).AetherLinkOracleContractAddress;
-    }
+    public override string GetContractAddress(string chainId) => ContractAddressHelper.GetContractAddress(chainId);
 
-    protected override async Task HandleEventAsync(Transmitted eventValue, LogEventContext context)
+    public override async Task ProcessAsync(Transmitted logEvent, LogEventContext context)
     {
-        _logger.LogDebug("[Transmitted] Transmitted chainId:{chainId}, requestId:{reqId}",
-            context.ChainId, eventValue.RequestId.ToHex());
-        var indexId = IdGenerateHelper.GetId(IdGenerateHelper.TransmittedPrefix, context.ChainId,
-            eventValue.RequestId.ToHex(), eventValue.ConfigDigest.ToHex(), eventValue.EpochAndRound);
-        var transmittedIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
-        if (transmittedIndex != null) return;
+        var chainId = context.ChainId;
+        var requestId = logEvent.RequestId.ToHex();
 
-        transmittedIndex = new TransmittedIndex
+        _logger.LogDebug("[Transmitted] chainId:{chainId}, requestId:{reqId}", chainId, requestId);
+
+        var indexId = IdGenerateHelper.GetTransmittedId(chainId, requestId, logEvent.ConfigDigest.ToHex(),
+            logEvent.EpochAndRound);
+        if (await GetEntityAsync<TransmittedIndex>(indexId) != null) return;
+
+        await SaveEntityAsync(new TransmittedIndex
         {
             Id = indexId,
-            RequestId = eventValue.RequestId.ToHex(),
+            ChainId = context.ChainId,
+            BlockHeight = context.Block.BlockHeight,
+            RequestId = logEvent.RequestId.ToHex(),
             StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
-            Epoch = eventValue.EpochAndRound
-        };
-        _objectMapper.Map(context, transmittedIndex);
-        await _repository.AddOrUpdateAsync(transmittedIndex);
+            Epoch = logEvent.EpochAndRound
+        });
     }
 }

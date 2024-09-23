@@ -1,30 +1,27 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Processor;
 using AetherLink.Indexer.GraphQL;
-using AetherLink.Indexer.Handlers;
-using AetherLink.Indexer.Options;
 using AetherLink.Indexer.Processors;
+using AetherLink.Indexer.Providers;
+using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 
 namespace AetherLink.Indexer;
 
-[DependsOn(typeof(AElfIndexerClientModule))]
-public class
-    AetherLinkIndexerModule : AElfIndexerClientPluginBaseModule<AetherLinkIndexerModule, AetherLinkIndexerSchema, Query>
+public class AetherLinkIndexerModule : AbpModule
 {
-    protected override void ConfigureServices(IServiceCollection serviceCollection)
+    public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        var configuration = serviceCollection.GetConfiguration();
-        serviceCollection.AddTransient<IBlockChainDataHandler, AetherLinkTransactionHandler>();
-        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, RequestStartedLogEventProcessor>();
-        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, ConfigSetLogEventProcessor>();
-        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, TransmittedLogEventProcessor>();
-        serviceCollection.AddSingleton<IAElfLogEventProcessor<LogEventInfo>, RequestCancelledLogEventProcessor>();
-        Configure<ContractInfoOptions>(configuration.GetSection("ContractInfo"));
+        Configure<AbpAutoMapperOptions>(options => { options.AddMaps<AetherLinkIndexerModule>(); });
+        context.Services.AddSingleton<ISchema, AppSchema>();
+        context.Services.AddSingleton<ITransactionEventProvider, TransactionEventProvider>();
+        context.Services.AddTransient<ILogEventProcessor, RequestStartedLogEventProcessor>();
+        context.Services.AddTransient<ILogEventProcessor, ConfigSetLogEventProcessor>();
+        context.Services.AddTransient<ILogEventProcessor, TransmittedLogEventProcessor>();
+        context.Services.AddTransient<ILogEventProcessor, RequestCancelledLogEventProcessor>();
+        context.Services.AddTransient<ILogEventProcessor, RampSendRequestedLogEventProcessor>();
+        context.Services.AddTransient<ITransactionProcessor, TransactionProcessor>();
+        context.Services.AddTransient<IBlockProcessor, BlockProcessor>();
     }
-
-    protected override string ClientId => "*";
-    protected override string Version => "*";
 }
