@@ -32,6 +32,7 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
         {
             Id = indexId,
             ChainId = context.ChainId,
+            TransactionId = context.Transaction.TransactionId,
             BlockHeight = context.Block.BlockHeight,
             MessageId = messageId,
             TargetChainId = logEvent.TargetChainId,
@@ -39,7 +40,8 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
             Sender = logEvent.Sender.ToBase64(),
             Receiver = logEvent.Receiver.ToBase64(),
             Data = logEvent.Data.ToBase64(),
-            Epoch = logEvent.Epoch
+            Epoch = logEvent.Epoch,
+            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds()
         });
     }
 }
