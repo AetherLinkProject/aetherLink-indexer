@@ -7,6 +7,7 @@ public class RampSendRequestedIndex : AeFinderEntity, IAeFinderEntity
 {
     [Keyword] public string ChainId { get; set; }
     public long BlockHeight { get; set; }
+    [Keyword] public string TransactionId { get; set; }
     [Keyword] public string MessageId { get; set; }
     public long TargetChainId { get; set; }
     public long SourceChainId { get; set; }
@@ -14,4 +15,5 @@ public class RampSendRequestedIndex : AeFinderEntity, IAeFinderEntity
     [Keyword] public string Receiver { get; set; }
     [Keyword] public string Data { get; set; }
     public long Epoch { get; set; }
+    public long StartTime { get; set; }
 }

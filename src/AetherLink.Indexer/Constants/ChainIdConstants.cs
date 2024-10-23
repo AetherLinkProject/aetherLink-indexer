@@ -3,5 +3,6 @@ namespace AetherLink.Indexer.Constants;
 public class ChainIdConstants
 {
     public const string MainChainId = "AELF";
-    public const string SideChainId = "tDVV";
+    // MainNet tDVV ｜ TestNet tDVW
+    public const string SideChainId = "tDVW";
 }

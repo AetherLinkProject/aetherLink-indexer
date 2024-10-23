@@ -29,7 +29,6 @@ public class BlockProcessor : BlockProcessorBase
             var entity = await GetEntityAsync<TransactionEventIndex>(logEvent);
             if (entity == null)
             {
-                _logger.LogDebug($"transaction event id {logEvent} not exist");
                 continue;
             }
 
