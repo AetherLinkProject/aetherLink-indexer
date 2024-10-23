@@ -35,7 +35,8 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
             new() { ChainId = "AELF", FromBlockHeight = 10, ToBlockHeight = 200 });
         result.Count.ShouldBe(1);
         result.First().ChainId.ShouldBe("AELF");
-        result.First().MessageId.ShouldBe(HashHelper.ComputeFrom("test_message_id").ToHex());
+        result.First().MessageId
+            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id").ToByteArray()).ToBase64());
         result.First().Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
         result.First().Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result.First().TargetChainId.ShouldBe(13);
@@ -48,7 +49,8 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
             new() { ChainId = "AELF", FromBlockHeight = 10, ToBlockHeight = 200 });
         result2.Count.ShouldBe(2);
         result2[1].ChainId.ShouldBe("AELF");
-        result2[1].MessageId.ShouldBe(HashHelper.ComputeFrom("test_message_id_2").ToHex());
+        result2[1].MessageId
+            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id_2").ToByteArray()).ToBase64());
         result2[1].Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
         result2[1].Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result2[1].TargetChainId.ShouldBe(13);
