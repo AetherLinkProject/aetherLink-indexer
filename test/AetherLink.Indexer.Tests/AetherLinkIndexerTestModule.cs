@@ -7,8 +7,7 @@ using Volo.Abp.Modularity;
 
 namespace aetherLink.indexer;
 
-[DependsOn(
-    typeof(AeFinderAppTestBaseModule),
+[DependsOn(typeof(AeFinderAppTestBaseModule),
     typeof(AetherLinkIndexerModule))]
 public class AetherLinkIndexerTestModule : AbpModule
 {
@@ -17,6 +16,9 @@ public class AetherLinkIndexerTestModule : AbpModule
         Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<AetherLinkIndexerModule>(); });
 
         // Add your Processors.
+        context.Services.AddSingleton<RampCommitReportAcceptedLogEventProcessor>();
+        context.Services.AddSingleton<TokenSwapConfigUpdatedLogEventProcessor>();
+        context.Services.AddSingleton<RampRequestCancelledLogEventProcessor>();
         context.Services.AddSingleton<RampSendRequestedLogEventProcessor>();
         context.Services.AddSingleton<RequestCancelledLogEventProcessor>();
         context.Services.AddSingleton<RequestStartedLogEventProcessor>();

@@ -10,4 +10,5 @@ public class TransmittedIndex : AeFinderEntity, IAeFinderEntity
     public long StartTime { get; set; }
     public long Epoch { get; set; }
     public long BlockHeight { get; set; }
+    public string TransactionId { get; set; }
 }

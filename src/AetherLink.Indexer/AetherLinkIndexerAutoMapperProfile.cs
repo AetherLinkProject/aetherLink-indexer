@@ -16,5 +16,8 @@ public class AetherLinkIndexerProfile : Profile
         CreateMap<TransmittedIndex, RequestStartEpochDto>();
         CreateMap<TransactionEventIndex, TransactionEventDto>();
         CreateMap<RampSendRequestedIndex, RampRequestDto>();
+        CreateMap<RampRequestCancelledIndex, RampRequestCancelledDto>();
+        CreateMap<RampCommitReportAcceptedIndex, RampCommitReportAcceptedDto>();
+        CreateMap<TokenSwapConfigInfoIndex, TokenSwapConfigDto>();
     }
 }

@@ -24,77 +24,106 @@ namespace AetherLink.Contracts.Ramp {
     static RampContractReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNyYW1wX2NvbnRyYWN0LnByb3RvEgRyYW1wGg9hZWxmL2NvcmUucHJvdG8a",
-            "EmFlbGYvb3B0aW9ucy5wcm90bxoLYWNzMTIucHJvdG8aG29yYWNsZV9jb21t",
-            "b25fbWVzc2FnZS5wcm90bxobZ29vZ2xlL3Byb3RvYnVmL2VtcHR5LnByb3Rv",
-            "Gh5nb29nbGUvcHJvdG9idWYvd3JhcHBlcnMucHJvdG8aH2dvb2dsZS9wcm90",
-            "b2J1Zi90aW1lc3RhbXAucHJvdG8iTgoPSW5pdGlhbGl6ZUlucHV0EhwKBWFk",
-            "bWluGAEgASgLMg0uYWVsZi5BZGRyZXNzEh0KBm9yYWNsZRgCIAEoCzINLmFl",
-            "bGYuQWRkcmVzcyIyCgZDb25maWcSKAoNY2hhaW5faWRfbGlzdBgBIAEoCzIR",
-            "LnJhbXAuQ2hhaW5JZExpc3QiGwoLQ2hhaW5JZExpc3QSDAoEZGF0YRgBIAMo",
-            "AyI7ChJBZGRSYW1wU2VuZGVySW5wdXQSJQoOc2VuZGVyX2FkZHJlc3MYASAB",
-            "KAsyDS5hZWxmLkFkZHJlc3MiZAoOUmFtcFNlbmRlckluZm8SJQoOc2VuZGVy",
-            "X2FkZHJlc3MYASABKAsyDS5hZWxmLkFkZHJlc3MSKwoHY3JlYXRlZBgCIAEo",
-            "CzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiXgoLQ29tbWl0SW5wdXQS",
-            "KwoOcmVwb3J0X2NvbnRleHQYASABKAsyEy5yYW1wLlJlcG9ydENvbnRleHQS",
-            "DgoGcmVwb3J0GAIgASgMEhIKCnNpZ25hdHVyZXMYAyADKAwikgEKDVJlcG9y",
-            "dENvbnRleHQSHgoKbWVzc2FnZV9pZBgBIAEoCzIKLmFlbGYuSGFzaBIXCg9z",
-            "b3VyY2VfY2hhaW5faWQYAiABKAMSFwoPdGFyZ2V0X2NoYWluX2lkGAMgASgD",
-            "Eg4KBnNlbmRlchgEIAEoDBIfCghyZWNlaXZlchgFIAEoCzINLmFlbGYuQWRk",
-            "cmVzcyJECglTZW5kSW5wdXQSFwoPdGFyZ2V0X2NoYWluX2lkGAEgASgDEhAK",
-            "CHJlY2VpdmVyGAIgASgMEgwKBGRhdGEYAyABKAwivAEKC01lc3NhZ2VJbmZv",
-            "Eh4KCm1lc3NhZ2VfaWQYASABKAsyCi5hZWxmLkhhc2gSFwoPc291cmNlX2No",
-            "YWluX2lkGAIgASgDEhcKD3RhcmdldF9jaGFpbl9pZBgDIAEoAxIOCgZzZW5k",
-            "ZXIYBCABKAwSEAoIcmVjZWl2ZXIYBSABKAwSDAoEZGF0YRgGIAEoDBIrCgdj",
-            "cmVhdGVkGAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCIvCglD",
-            "b25maWdTZXQSHAoGY29uZmlnGAEgASgLMgwucmFtcC5Db25maWc6BKC7GAEi",
-            "PgoPUmFtcFNlbmRlckFkZGVkEiUKDnNlbmRlcl9hZGRyZXNzGAEgASgLMg0u",
-            "YWVsZi5BZGRyZXNzOgSguxgBIkAKEVJhbXBTZW5kZXJSZW1vdmVkEiUKDnNl",
-            "bmRlcl9hZGRyZXNzGAEgASgLMg0uYWVsZi5BZGRyZXNzOgSguxgBIq8BChRD",
-            "b21taXRSZXBvcnRBY2NlcHRlZBIeCgptZXNzYWdlX2lkGAEgASgLMgouYWVs",
-            "Zi5IYXNoEhcKD3NvdXJjZV9jaGFpbl9pZBgCIAEoAxIXCg90YXJnZXRfY2hh",
-            "aW5faWQYAyABKAMSDgoGc2VuZGVyGAQgASgMEh8KCHJlY2VpdmVyGAUgASgL",
-            "Mg0uYWVsZi5BZGRyZXNzEg4KBnJlcG9ydBgGIAEoDDoEoLsYASKNAQoNU2Vu",
-            "ZFJlcXVlc3RlZBIeCgptZXNzYWdlX2lkGAEgASgLMgouYWVsZi5IYXNoEhcK",
-            "D3RhcmdldF9jaGFpbl9pZBgCIAEoAxIQCghyZWNlaXZlchgDIAEoDBIOCgZz",
-            "ZW5kZXIYBCABKAwSDAoEZGF0YRgFIAEoDBINCgVlcG9jaBgGIAEoAzoEoLsY",
-            "ATK+BgoMUmFtcENvbnRyYWN0Ej0KCkluaXRpYWxpemUSFS5yYW1wLkluaXRp",
-            "YWxpemVJbnB1dBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEjMKCVNldENv",
-            "bmZpZxIMLnJhbXAuQ29uZmlnGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgAS",
-            "OAoJR2V0Q29uZmlnEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GgwucmFtcC5D",
-            "b25maWciBYiJ9wEBEjgKCEdldEFkbWluEhYuZ29vZ2xlLnByb3RvYnVmLkVt",
-            "cHR5Gg0uYWVsZi5BZGRyZXNzIgWIifcBARJDChhTZXRPcmFjbGVDb250cmFj",
-            "dEFkZHJlc3MSDS5hZWxmLkFkZHJlc3MaFi5nb29nbGUucHJvdG9idWYuRW1w",
-            "dHkiABJIChhHZXRPcmFjbGVDb250cmFjdEFkZHJlc3MSFi5nb29nbGUucHJv",
-            "dG9idWYuRW1wdHkaDS5hZWxmLkFkZHJlc3MiBYiJ9wEBEkMKDUFkZFJhbXBT",
-            "ZW5kZXISGC5yYW1wLkFkZFJhbXBTZW5kZXJJbnB1dBoWLmdvb2dsZS5wcm90",
-            "b2J1Zi5FbXB0eSIAEjsKEFJlbW92ZVJhbXBTZW5kZXISDS5hZWxmLkFkZHJl",
-            "c3MaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABI7Cg1HZXRSYW1wU2VuZGVy",
-            "Eg0uYWVsZi5BZGRyZXNzGhQucmFtcC5SYW1wU2VuZGVySW5mbyIFiIn3AQES",
-            "TAoOR2V0TGF0ZXN0RXBvY2gSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGy5n",
-            "b29nbGUucHJvdG9idWYuSW50NjRWYWx1ZSIFiIn3AQESMQoEU2VuZBIPLnJh",
-            "bXAuU2VuZElucHV0GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgASNQoGQ29t",
-            "bWl0EhEucmFtcC5Db21taXRJbnB1dBoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0",
-            "eSIAGkDKyvYBC2FjczEyLnByb3Rvssz2AStBZXRoZXJMaW5rLkNvbnRyYWN0",
-            "cy5SYW1wLlJhbXBDb250cmFjdFN0YXRlQhyqAhlBZXRoZXJMaW5rLkNvbnRy",
-            "YWN0cy5SYW1wYgZwcm90bzM="));
+            "ChNyYW1wX2NvbnRyYWN0LnByb3RvGg9hZWxmL2NvcmUucHJvdG8aEmFlbGYv",
+            "b3B0aW9ucy5wcm90bxoLYWNzMTIucHJvdG8aG29yYWNsZV9jb21tb25fbWVz",
+            "c2FnZS5wcm90bxoZcmFtcF9jb21tb25fbWVzc2FnZS5wcm90bxobZ29vZ2xl",
+            "L3Byb3RvYnVmL2VtcHR5LnByb3RvGh5nb29nbGUvcHJvdG9idWYvd3JhcHBl",
+            "cnMucHJvdG8aH2dvb2dsZS9wcm90b2J1Zi90aW1lc3RhbXAucHJvdG8iTgoP",
+            "SW5pdGlhbGl6ZUlucHV0EhwKBWFkbWluGAEgASgLMg0uYWVsZi5BZGRyZXNz",
+            "Eh0KBm9yYWNsZRgCIAEoCzINLmFlbGYuQWRkcmVzcyItCgZDb25maWcSIwoN",
+            "Y2hhaW5faWRfbGlzdBgBIAEoCzIMLkNoYWluSWRMaXN0IhsKC0NoYWluSWRM",
+            "aXN0EgwKBGRhdGEYASADKAMiOwoSQWRkUmFtcFNlbmRlcklucHV0EiUKDnNl",
+            "bmRlcl9hZGRyZXNzGAEgASgLMg0uYWVsZi5BZGRyZXNzImQKDlJhbXBTZW5k",
+            "ZXJJbmZvEiUKDnNlbmRlcl9hZGRyZXNzGAEgASgLMg0uYWVsZi5BZGRyZXNz",
+            "EisKB2NyZWF0ZWQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1w",
+            "IjoKC0NvbW1pdElucHV0EhcKBnJlcG9ydBgBIAEoCzIHLlJlcG9ydBISCgpz",
+            "aWduYXR1cmVzGAIgAygMImoKBlJlcG9ydBImCg5yZXBvcnRfY29udGV4dBgB",
+            "IAEoCzIOLlJlcG9ydENvbnRleHQSDwoHbWVzc2FnZRgCIAEoDBInCgx0b2tl",
+            "bl9hbW91bnQYAyABKAsyES5yYW1wLlRva2VuQW1vdW50IoMBCg1SZXBvcnRD",
+            "b250ZXh0Eh4KCm1lc3NhZ2VfaWQYASABKAsyCi5hZWxmLkhhc2gSFwoPc291",
+            "cmNlX2NoYWluX2lkGAIgASgDEhcKD3RhcmdldF9jaGFpbl9pZBgDIAEoAxIO",
+            "CgZzZW5kZXIYBCABKAwSEAoIcmVjZWl2ZXIYBSABKAwicAoJU2VuZElucHV0",
+            "EhcKD3RhcmdldF9jaGFpbl9pZBgBIAEoAxIQCghyZWNlaXZlchgCIAEoDBIP",
+            "CgdtZXNzYWdlGAMgASgMEicKDHRva2VuX2Ftb3VudBgEIAEoCzIRLnJhbXAu",
+            "VG9rZW5BbW91bnQi6AEKC01lc3NhZ2VJbmZvEh4KCm1lc3NhZ2VfaWQYASAB",
+            "KAsyCi5hZWxmLkhhc2gSFwoPc291cmNlX2NoYWluX2lkGAIgASgDEhcKD3Rh",
+            "cmdldF9jaGFpbl9pZBgDIAEoAxIOCgZzZW5kZXIYBCABKAwSEAoIcmVjZWl2",
+            "ZXIYBSABKAwSDwoHbWVzc2FnZRgGIAEoDBInCgx0b2tlbl9hbW91bnQYByAB",
+            "KAsyES5yYW1wLlRva2VuQW1vdW50EisKB2NyZWF0ZWQYCCABKAsyGi5nb29n",
+            "bGUucHJvdG9idWYuVGltZXN0YW1wIjoKD1Rva2VuU3dhcENvbmZpZxInCg90",
+            "b2tlbl9zd2FwX2xpc3QYASABKAsyDi5Ub2tlblN3YXBMaXN0Ij0KDVRva2Vu",
+            "U3dhcExpc3QSLAoUdG9rZW5fc3dhcF9pbmZvX2xpc3QYASADKAsyDi5Ub2tl",
+            "blN3YXBJbmZvIocBCg1Ub2tlblN3YXBJbmZvEhcKD3RhcmdldF9jaGFpbl9p",
+            "ZBgBIAEoAxIfChd0YXJnZXRfY29udHJhY3RfYWRkcmVzcxgCIAEoCRIVCg10",
+            "b2tlbl9hZGRyZXNzGAMgASgJEhQKDG9yaWdpbl90b2tlbhgEIAEoCRIPCgdz",
+            "d2FwX2lkGAUgASgJIioKCUNvbmZpZ1NldBIXCgZjb25maWcYASABKAsyBy5D",
+            "b25maWc6BKC7GAEiPgoPUmFtcFNlbmRlckFkZGVkEiUKDnNlbmRlcl9hZGRy",
+            "ZXNzGAEgASgLMg0uYWVsZi5BZGRyZXNzOgSguxgBIkAKEVJhbXBTZW5kZXJS",
+            "ZW1vdmVkEiUKDnNlbmRlcl9hZGRyZXNzGAEgASgLMg0uYWVsZi5BZGRyZXNz",
+            "OgSguxgBIjUKFENvbW1pdFJlcG9ydEFjY2VwdGVkEhcKBnJlcG9ydBgBIAEo",
+            "CzIHLlJlcG9ydDoEoLsYASLSAQoNU2VuZFJlcXVlc3RlZBIeCgptZXNzYWdl",
+            "X2lkGAEgASgLMgouYWVsZi5IYXNoEhcKD3RhcmdldF9jaGFpbl9pZBgCIAEo",
+            "AxIXCg9zb3VyY2VfY2hhaW5faWQYAyABKAMSEAoIcmVjZWl2ZXIYBCABKAwS",
+            "DgoGc2VuZGVyGAUgASgMEg8KB21lc3NhZ2UYBiABKAwSJwoMdG9rZW5fYW1v",
+            "dW50GAcgASgLMhEucmFtcC5Ub2tlbkFtb3VudBINCgVlcG9jaBgIIAEoAzoE",
+            "oLsYASI4ChBSZXF1ZXN0Q2FuY2VsbGVkEh4KCm1lc3NhZ2VfaWQYASABKAsy",
+            "Ci5hZWxmLkhhc2g6BKC7GAEiVgoWQWRtaW5UcmFuc2ZlclJlcXVlc3RlZBIb",
+            "CgRmcm9tGAEgASgLMg0uYWVsZi5BZGRyZXNzEhkKAnRvGAIgASgLMg0uYWVs",
+            "Zi5BZGRyZXNzOgSguxgBIlAKEEFkbWluVHJhbnNmZXJyZWQSGwoEZnJvbRgB",
+            "IAEoCzINLmFlbGYuQWRkcmVzcxIZCgJ0bxgCIAEoCzINLmFlbGYuQWRkcmVz",
+            "czoEoLsYASJuChZUb2tlblN3YXBDb25maWdVcGRhdGVkEicKEGNvbnRyYWN0",
+            "X2FkZHJlc3MYASABKAsyDS5hZWxmLkFkZHJlc3MSJQoNVG9rZW5Td2FwTGlz",
+            "dBgCIAEoCzIOLlRva2VuU3dhcExpc3Q6BKC7GAEyxggKDFJhbXBDb250cmFj",
+            "dBI4CgpJbml0aWFsaXplEhAuSW5pdGlhbGl6ZUlucHV0GhYuZ29vZ2xlLnBy",
+            "b3RvYnVmLkVtcHR5IgASLgoJU2V0Q29uZmlnEgcuQ29uZmlnGhYuZ29vZ2xl",
+            "LnByb3RvYnVmLkVtcHR5IgASMwoJR2V0Q29uZmlnEhYuZ29vZ2xlLnByb3Rv",
+            "YnVmLkVtcHR5GgcuQ29uZmlnIgWIifcBARI4CghHZXRBZG1pbhIWLmdvb2ds",
+            "ZS5wcm90b2J1Zi5FbXB0eRoNLmFlbGYuQWRkcmVzcyIFiIn3AQESQwoYU2V0",
+            "T3JhY2xlQ29udHJhY3RBZGRyZXNzEg0uYWVsZi5BZGRyZXNzGhYuZ29vZ2xl",
+            "LnByb3RvYnVmLkVtcHR5IgASSAoYR2V0T3JhY2xlQ29udHJhY3RBZGRyZXNz",
+            "EhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5Gg0uYWVsZi5BZGRyZXNzIgWIifcB",
+            "ARI+Cg1BZGRSYW1wU2VuZGVyEhMuQWRkUmFtcFNlbmRlcklucHV0GhYuZ29v",
+            "Z2xlLnByb3RvYnVmLkVtcHR5IgASOwoQUmVtb3ZlUmFtcFNlbmRlchINLmFl",
+            "bGYuQWRkcmVzcxoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEkAKElNldFRv",
+            "a2VuU3dhcENvbmZpZxIQLlRva2VuU3dhcENvbmZpZxoWLmdvb2dsZS5wcm90",
+            "b2J1Zi5FbXB0eSIAEjwKEkdldFRva2VuU3dhcENvbmZpZxINLmFlbGYuQWRk",
+            "cmVzcxoQLlRva2VuU3dhcENvbmZpZyIFiIn3AQESOAoNVHJhbnNmZXJBZG1p",
+            "bhINLmFlbGYuQWRkcmVzcxoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEj8K",
+            "C0FjY2VwdEFkbWluEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GhYuZ29vZ2xl",
+            "LnByb3RvYnVmLkVtcHR5IgASNgoNR2V0UmFtcFNlbmRlchINLmFlbGYuQWRk",
+            "cmVzcxoPLlJhbXBTZW5kZXJJbmZvIgWIifcBARJMCg5HZXRMYXRlc3RFcG9j",
+            "aBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRobLmdvb2dsZS5wcm90b2J1Zi5J",
+            "bnQ2NFZhbHVlIgWIifcBARIsCgRTZW5kEgouU2VuZElucHV0GhYuZ29vZ2xl",
+            "LnByb3RvYnVmLkVtcHR5IgASMAoGQ29tbWl0EgwuQ29tbWl0SW5wdXQaFi5n",
+            "b29nbGUucHJvdG9idWYuRW1wdHkiABIuCgZDYW5jZWwSCi5hZWxmLkhhc2ga",
+            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkiABpAysr2AQthY3MxMi5wcm90b7LM",
+            "9gErQWV0aGVyTGluay5Db250cmFjdHMuUmFtcC5SYW1wQ29udHJhY3RTdGF0",
+            "ZUIcqgIZQWV0aGVyTGluay5Db250cmFjdHMuUmFtcGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::AElf.Types.CoreReflection.Descriptor, global::AElf.OptionsReflection.Descriptor, global::AElf.Standards.ACS12.Acs12Reflection.Descriptor, global::Oracle.OracleCommonMessageReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::AElf.Types.CoreReflection.Descriptor, global::AElf.OptionsReflection.Descriptor, global::AElf.Standards.ACS12.Acs12Reflection.Descriptor, global::Oracle.OracleCommonMessageReflection.Descriptor, global::Ramp.RampCommonMessageReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.WrappersReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.InitializeInput), global::AetherLink.Contracts.Ramp.InitializeInput.Parser, new[]{ "Admin", "Oracle" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.Config), global::AetherLink.Contracts.Ramp.Config.Parser, new[]{ "ChainIdList" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.ChainIdList), global::AetherLink.Contracts.Ramp.ChainIdList.Parser, new[]{ "Data" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.AddRampSenderInput), global::AetherLink.Contracts.Ramp.AddRampSenderInput.Parser, new[]{ "SenderAddress" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RampSenderInfo), global::AetherLink.Contracts.Ramp.RampSenderInfo.Parser, new[]{ "SenderAddress", "Created" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.CommitInput), global::AetherLink.Contracts.Ramp.CommitInput.Parser, new[]{ "ReportContext", "Report", "Signatures" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.CommitInput), global::AetherLink.Contracts.Ramp.CommitInput.Parser, new[]{ "Report", "Signatures" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.Report), global::AetherLink.Contracts.Ramp.Report.Parser, new[]{ "ReportContext", "Message", "TokenAmount" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.ReportContext), global::AetherLink.Contracts.Ramp.ReportContext.Parser, new[]{ "MessageId", "SourceChainId", "TargetChainId", "Sender", "Receiver" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendInput), global::AetherLink.Contracts.Ramp.SendInput.Parser, new[]{ "TargetChainId", "Receiver", "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.MessageInfo), global::AetherLink.Contracts.Ramp.MessageInfo.Parser, new[]{ "MessageId", "SourceChainId", "TargetChainId", "Sender", "Receiver", "Data", "Created" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendInput), global::AetherLink.Contracts.Ramp.SendInput.Parser, new[]{ "TargetChainId", "Receiver", "Message", "TokenAmount" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.MessageInfo), global::AetherLink.Contracts.Ramp.MessageInfo.Parser, new[]{ "MessageId", "SourceChainId", "TargetChainId", "Sender", "Receiver", "Message", "TokenAmount", "Created" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.TokenSwapConfig), global::AetherLink.Contracts.Ramp.TokenSwapConfig.Parser, new[]{ "TokenSwapList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.TokenSwapList), global::AetherLink.Contracts.Ramp.TokenSwapList.Parser, new[]{ "TokenSwapInfoList" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.TokenSwapInfo), global::AetherLink.Contracts.Ramp.TokenSwapInfo.Parser, new[]{ "TargetChainId", "TargetContractAddress", "TokenAddress", "OriginToken", "SwapId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.ConfigSet), global::AetherLink.Contracts.Ramp.ConfigSet.Parser, new[]{ "Config" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RampSenderAdded), global::AetherLink.Contracts.Ramp.RampSenderAdded.Parser, new[]{ "SenderAddress" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RampSenderRemoved), global::AetherLink.Contracts.Ramp.RampSenderRemoved.Parser, new[]{ "SenderAddress" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.CommitReportAccepted), global::AetherLink.Contracts.Ramp.CommitReportAccepted.Parser, new[]{ "MessageId", "SourceChainId", "TargetChainId", "Sender", "Receiver", "Report" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendRequested), global::AetherLink.Contracts.Ramp.SendRequested.Parser, new[]{ "MessageId", "TargetChainId", "Receiver", "Sender", "Data", "Epoch" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.CommitReportAccepted), global::AetherLink.Contracts.Ramp.CommitReportAccepted.Parser, new[]{ "Report" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.SendRequested), global::AetherLink.Contracts.Ramp.SendRequested.Parser, new[]{ "MessageId", "TargetChainId", "SourceChainId", "Receiver", "Sender", "Message", "TokenAmount", "Epoch" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.RequestCancelled), global::AetherLink.Contracts.Ramp.RequestCancelled.Parser, new[]{ "MessageId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.AdminTransferRequested), global::AetherLink.Contracts.Ramp.AdminTransferRequested.Parser, new[]{ "From", "To" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.AdminTransferred), global::AetherLink.Contracts.Ramp.AdminTransferred.Parser, new[]{ "From", "To" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AetherLink.Contracts.Ramp.TokenSwapConfigUpdated), global::AetherLink.Contracts.Ramp.TokenSwapConfigUpdated.Parser, new[]{ "ContractAddress", "TokenSwapList" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1199,8 +1228,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CommitInput(CommitInput other) : this() {
-      reportContext_ = other.reportContext_ != null ? other.reportContext_.Clone() : null;
-      report_ = other.report_;
+      report_ = other.report_ != null ? other.report_.Clone() : null;
       signatures_ = other.signatures_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1211,34 +1239,22 @@ namespace AetherLink.Contracts.Ramp {
       return new CommitInput(this);
     }
 
-    /// <summary>Field number for the "report_context" field.</summary>
-    public const int ReportContextFieldNumber = 1;
-    private global::AetherLink.Contracts.Ramp.ReportContext reportContext_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::AetherLink.Contracts.Ramp.ReportContext ReportContext {
-      get { return reportContext_; }
-      set {
-        reportContext_ = value;
-      }
-    }
-
     /// <summary>Field number for the "report" field.</summary>
-    public const int ReportFieldNumber = 2;
-    private pb::ByteString report_ = pb::ByteString.Empty;
+    public const int ReportFieldNumber = 1;
+    private global::AetherLink.Contracts.Ramp.Report report_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Report {
+    public global::AetherLink.Contracts.Ramp.Report Report {
       get { return report_; }
       set {
-        report_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        report_ = value;
       }
     }
 
     /// <summary>Field number for the "signatures" field.</summary>
-    public const int SignaturesFieldNumber = 3;
+    public const int SignaturesFieldNumber = 2;
     private static readonly pb::FieldCodec<pb::ByteString> _repeated_signatures_codec
-        = pb::FieldCodec.ForBytes(26);
+        = pb::FieldCodec.ForBytes(18);
     private readonly pbc::RepeatedField<pb::ByteString> signatures_ = new pbc::RepeatedField<pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1261,8 +1277,7 @@ namespace AetherLink.Contracts.Ramp {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(ReportContext, other.ReportContext)) return false;
-      if (Report != other.Report) return false;
+      if (!object.Equals(Report, other.Report)) return false;
       if(!signatures_.Equals(other.signatures_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1271,9 +1286,248 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (reportContext_ != null) hash ^= ReportContext.GetHashCode();
-      if (Report.Length != 0) hash ^= Report.GetHashCode();
+      if (report_ != null) hash ^= Report.GetHashCode();
       hash ^= signatures_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (report_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Report);
+      }
+      signatures_.WriteTo(output, _repeated_signatures_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (report_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Report);
+      }
+      signatures_.WriteTo(ref output, _repeated_signatures_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (report_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Report);
+      }
+      size += signatures_.CalculateSize(_repeated_signatures_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CommitInput other) {
+      if (other == null) {
+        return;
+      }
+      if (other.report_ != null) {
+        if (report_ == null) {
+          Report = new global::AetherLink.Contracts.Ramp.Report();
+        }
+        Report.MergeFrom(other.Report);
+      }
+      signatures_.Add(other.signatures_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (report_ == null) {
+              Report = new global::AetherLink.Contracts.Ramp.Report();
+            }
+            input.ReadMessage(Report);
+            break;
+          }
+          case 18: {
+            signatures_.AddEntriesFrom(input, _repeated_signatures_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (report_ == null) {
+              Report = new global::AetherLink.Contracts.Ramp.Report();
+            }
+            input.ReadMessage(Report);
+            break;
+          }
+          case 18: {
+            signatures_.AddEntriesFrom(ref input, _repeated_signatures_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class Report : pb::IMessage<Report>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Report> _parser = new pb::MessageParser<Report>(() => new Report());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<Report> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Report() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Report(Report other) : this() {
+      reportContext_ = other.reportContext_ != null ? other.reportContext_.Clone() : null;
+      message_ = other.message_;
+      tokenAmount_ = other.tokenAmount_ != null ? other.tokenAmount_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public Report Clone() {
+      return new Report(this);
+    }
+
+    /// <summary>Field number for the "report_context" field.</summary>
+    public const int ReportContextFieldNumber = 1;
+    private global::AetherLink.Contracts.Ramp.ReportContext reportContext_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AetherLink.Contracts.Ramp.ReportContext ReportContext {
+      get { return reportContext_; }
+      set {
+        reportContext_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 2;
+    private pb::ByteString message_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_amount" field.</summary>
+    public const int TokenAmountFieldNumber = 3;
+    private global::Ramp.TokenAmount tokenAmount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Ramp.TokenAmount TokenAmount {
+      get { return tokenAmount_; }
+      set {
+        tokenAmount_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as Report);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(Report other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ReportContext, other.ReportContext)) return false;
+      if (Message != other.Message) return false;
+      if (!object.Equals(TokenAmount, other.TokenAmount)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (reportContext_ != null) hash ^= ReportContext.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (tokenAmount_ != null) hash ^= TokenAmount.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1296,11 +1550,14 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(10);
         output.WriteMessage(ReportContext);
       }
-      if (Report.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(Report);
+        output.WriteBytes(Message);
       }
-      signatures_.WriteTo(output, _repeated_signatures_codec);
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TokenAmount);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1315,11 +1572,14 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(10);
         output.WriteMessage(ReportContext);
       }
-      if (Report.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteBytes(Report);
+        output.WriteBytes(Message);
       }
-      signatures_.WriteTo(ref output, _repeated_signatures_codec);
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TokenAmount);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1333,10 +1593,12 @@ namespace AetherLink.Contracts.Ramp {
       if (reportContext_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReportContext);
       }
-      if (Report.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Report);
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Message);
       }
-      size += signatures_.CalculateSize(_repeated_signatures_codec);
+      if (tokenAmount_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenAmount);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1345,7 +1607,7 @@ namespace AetherLink.Contracts.Ramp {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(CommitInput other) {
+    public void MergeFrom(Report other) {
       if (other == null) {
         return;
       }
@@ -1355,10 +1617,15 @@ namespace AetherLink.Contracts.Ramp {
         }
         ReportContext.MergeFrom(other.ReportContext);
       }
-      if (other.Report.Length != 0) {
-        Report = other.Report;
+      if (other.Message.Length != 0) {
+        Message = other.Message;
       }
-      signatures_.Add(other.signatures_);
+      if (other.tokenAmount_ != null) {
+        if (tokenAmount_ == null) {
+          TokenAmount = new global::Ramp.TokenAmount();
+        }
+        TokenAmount.MergeFrom(other.TokenAmount);
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1382,11 +1649,14 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 18: {
-            Report = input.ReadBytes();
+            Message = input.ReadBytes();
             break;
           }
           case 26: {
-            signatures_.AddEntriesFrom(input, _repeated_signatures_codec);
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
             break;
           }
         }
@@ -1412,11 +1682,14 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 18: {
-            Report = input.ReadBytes();
+            Message = input.ReadBytes();
             break;
           }
           case 26: {
-            signatures_.AddEntriesFrom(ref input, _repeated_signatures_codec);
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
             break;
           }
         }
@@ -1440,7 +1713,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[6]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1464,7 +1737,7 @@ namespace AetherLink.Contracts.Ramp {
       sourceChainId_ = other.sourceChainId_;
       targetChainId_ = other.targetChainId_;
       sender_ = other.sender_;
-      receiver_ = other.receiver_ != null ? other.receiver_.Clone() : null;
+      receiver_ = other.receiver_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1524,13 +1797,13 @@ namespace AetherLink.Contracts.Ramp {
 
     /// <summary>Field number for the "receiver" field.</summary>
     public const int ReceiverFieldNumber = 5;
-    private global::AElf.Types.Address receiver_;
+    private pb::ByteString receiver_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::AElf.Types.Address Receiver {
+    public pb::ByteString Receiver {
       get { return receiver_; }
       set {
-        receiver_ = value;
+        receiver_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -1553,7 +1826,7 @@ namespace AetherLink.Contracts.Ramp {
       if (SourceChainId != other.SourceChainId) return false;
       if (TargetChainId != other.TargetChainId) return false;
       if (Sender != other.Sender) return false;
-      if (!object.Equals(Receiver, other.Receiver)) return false;
+      if (Receiver != other.Receiver) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1565,7 +1838,7 @@ namespace AetherLink.Contracts.Ramp {
       if (SourceChainId != 0L) hash ^= SourceChainId.GetHashCode();
       if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
       if (Sender.Length != 0) hash ^= Sender.GetHashCode();
-      if (receiver_ != null) hash ^= Receiver.GetHashCode();
+      if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1600,9 +1873,9 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(34);
         output.WriteBytes(Sender);
       }
-      if (receiver_ != null) {
+      if (Receiver.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteMessage(Receiver);
+        output.WriteBytes(Receiver);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1630,9 +1903,9 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(34);
         output.WriteBytes(Sender);
       }
-      if (receiver_ != null) {
+      if (Receiver.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteMessage(Receiver);
+        output.WriteBytes(Receiver);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1656,8 +1929,8 @@ namespace AetherLink.Contracts.Ramp {
       if (Sender.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Sender);
       }
-      if (receiver_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Receiver);
+      if (Receiver.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Receiver);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1686,11 +1959,8 @@ namespace AetherLink.Contracts.Ramp {
       if (other.Sender.Length != 0) {
         Sender = other.Sender;
       }
-      if (other.receiver_ != null) {
-        if (receiver_ == null) {
-          Receiver = new global::AElf.Types.Address();
-        }
-        Receiver.MergeFrom(other.Receiver);
+      if (other.Receiver.Length != 0) {
+        Receiver = other.Receiver;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1727,10 +1997,7 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 42: {
-            if (receiver_ == null) {
-              Receiver = new global::AElf.Types.Address();
-            }
-            input.ReadMessage(Receiver);
+            Receiver = input.ReadBytes();
             break;
           }
         }
@@ -1768,10 +2035,7 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 42: {
-            if (receiver_ == null) {
-              Receiver = new global::AElf.Types.Address();
-            }
-            input.ReadMessage(Receiver);
+            Receiver = input.ReadBytes();
             break;
           }
         }
@@ -1795,7 +2059,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[7]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1817,7 +2081,8 @@ namespace AetherLink.Contracts.Ramp {
     public SendInput(SendInput other) : this() {
       targetChainId_ = other.targetChainId_;
       receiver_ = other.receiver_;
-      data_ = other.data_;
+      message_ = other.message_;
+      tokenAmount_ = other.tokenAmount_ != null ? other.tokenAmount_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1851,15 +2116,27 @@ namespace AetherLink.Contracts.Ramp {
       }
     }
 
-    /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 3;
-    private pb::ByteString data_ = pb::ByteString.Empty;
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 3;
+    private pb::ByteString message_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Data {
-      get { return data_; }
+    public pb::ByteString Message {
+      get { return message_; }
       set {
-        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_amount" field.</summary>
+    public const int TokenAmountFieldNumber = 4;
+    private global::Ramp.TokenAmount tokenAmount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Ramp.TokenAmount TokenAmount {
+      get { return tokenAmount_; }
+      set {
+        tokenAmount_ = value;
       }
     }
 
@@ -1880,7 +2157,8 @@ namespace AetherLink.Contracts.Ramp {
       }
       if (TargetChainId != other.TargetChainId) return false;
       if (Receiver != other.Receiver) return false;
-      if (Data != other.Data) return false;
+      if (Message != other.Message) return false;
+      if (!object.Equals(TokenAmount, other.TokenAmount)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1890,7 +2168,8 @@ namespace AetherLink.Contracts.Ramp {
       int hash = 1;
       if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
       if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
-      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (tokenAmount_ != null) hash ^= TokenAmount.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1917,9 +2196,13 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(18);
         output.WriteBytes(Receiver);
       }
-      if (Data.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(Data);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(TokenAmount);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1939,9 +2222,13 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(18);
         output.WriteBytes(Receiver);
       }
-      if (Data.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(Data);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(TokenAmount);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1959,8 +2246,11 @@ namespace AetherLink.Contracts.Ramp {
       if (Receiver.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Receiver);
       }
-      if (Data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Message);
+      }
+      if (tokenAmount_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenAmount);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1980,8 +2270,14 @@ namespace AetherLink.Contracts.Ramp {
       if (other.Receiver.Length != 0) {
         Receiver = other.Receiver;
       }
-      if (other.Data.Length != 0) {
-        Data = other.Data;
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      if (other.tokenAmount_ != null) {
+        if (tokenAmount_ == null) {
+          TokenAmount = new global::Ramp.TokenAmount();
+        }
+        TokenAmount.MergeFrom(other.TokenAmount);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2007,7 +2303,14 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 26: {
-            Data = input.ReadBytes();
+            Message = input.ReadBytes();
+            break;
+          }
+          case 34: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
             break;
           }
         }
@@ -2034,7 +2337,14 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 26: {
-            Data = input.ReadBytes();
+            Message = input.ReadBytes();
+            break;
+          }
+          case 34: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
             break;
           }
         }
@@ -2058,7 +2368,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[8]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2083,7 +2393,8 @@ namespace AetherLink.Contracts.Ramp {
       targetChainId_ = other.targetChainId_;
       sender_ = other.sender_;
       receiver_ = other.receiver_;
-      data_ = other.data_;
+      message_ = other.message_;
+      tokenAmount_ = other.tokenAmount_ != null ? other.tokenAmount_.Clone() : null;
       created_ = other.created_ != null ? other.created_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -2154,20 +2465,32 @@ namespace AetherLink.Contracts.Ramp {
       }
     }
 
-    /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 6;
-    private pb::ByteString data_ = pb::ByteString.Empty;
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 6;
+    private pb::ByteString message_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Data {
-      get { return data_; }
+    public pb::ByteString Message {
+      get { return message_; }
       set {
-        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_amount" field.</summary>
+    public const int TokenAmountFieldNumber = 7;
+    private global::Ramp.TokenAmount tokenAmount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Ramp.TokenAmount TokenAmount {
+      get { return tokenAmount_; }
+      set {
+        tokenAmount_ = value;
       }
     }
 
     /// <summary>Field number for the "created" field.</summary>
-    public const int CreatedFieldNumber = 7;
+    public const int CreatedFieldNumber = 8;
     private global::Google.Protobuf.WellKnownTypes.Timestamp created_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2198,7 +2521,8 @@ namespace AetherLink.Contracts.Ramp {
       if (TargetChainId != other.TargetChainId) return false;
       if (Sender != other.Sender) return false;
       if (Receiver != other.Receiver) return false;
-      if (Data != other.Data) return false;
+      if (Message != other.Message) return false;
+      if (!object.Equals(TokenAmount, other.TokenAmount)) return false;
       if (!object.Equals(Created, other.Created)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2212,7 +2536,8 @@ namespace AetherLink.Contracts.Ramp {
       if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
       if (Sender.Length != 0) hash ^= Sender.GetHashCode();
       if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
-      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (tokenAmount_ != null) hash ^= TokenAmount.GetHashCode();
       if (created_ != null) hash ^= Created.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2252,12 +2577,16 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(42);
         output.WriteBytes(Receiver);
       }
-      if (Data.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(50);
-        output.WriteBytes(Data);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(TokenAmount);
       }
       if (created_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(66);
         output.WriteMessage(Created);
       }
       if (_unknownFields != null) {
@@ -2290,12 +2619,16 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(42);
         output.WriteBytes(Receiver);
       }
-      if (Data.Length != 0) {
+      if (Message.Length != 0) {
         output.WriteRawTag(50);
-        output.WriteBytes(Data);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(TokenAmount);
       }
       if (created_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(66);
         output.WriteMessage(Created);
       }
       if (_unknownFields != null) {
@@ -2323,8 +2656,11 @@ namespace AetherLink.Contracts.Ramp {
       if (Receiver.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Receiver);
       }
-      if (Data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Message);
+      }
+      if (tokenAmount_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenAmount);
       }
       if (created_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Created);
@@ -2359,8 +2695,14 @@ namespace AetherLink.Contracts.Ramp {
       if (other.Receiver.Length != 0) {
         Receiver = other.Receiver;
       }
-      if (other.Data.Length != 0) {
-        Data = other.Data;
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      if (other.tokenAmount_ != null) {
+        if (tokenAmount_ == null) {
+          TokenAmount = new global::Ramp.TokenAmount();
+        }
+        TokenAmount.MergeFrom(other.TokenAmount);
       }
       if (other.created_ != null) {
         if (created_ == null) {
@@ -2407,10 +2749,17 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 50: {
-            Data = input.ReadBytes();
+            Message = input.ReadBytes();
             break;
           }
           case 58: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
+            break;
+          }
+          case 66: {
             if (created_ == null) {
               Created = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
@@ -2456,14 +2805,734 @@ namespace AetherLink.Contracts.Ramp {
             break;
           }
           case 50: {
-            Data = input.ReadBytes();
+            Message = input.ReadBytes();
             break;
           }
           case 58: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
+            break;
+          }
+          case 66: {
             if (created_ == null) {
               Created = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(Created);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TokenSwapConfig : pb::IMessage<TokenSwapConfig>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TokenSwapConfig> _parser = new pb::MessageParser<TokenSwapConfig>(() => new TokenSwapConfig());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TokenSwapConfig> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfig() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfig(TokenSwapConfig other) : this() {
+      tokenSwapList_ = other.tokenSwapList_ != null ? other.tokenSwapList_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfig Clone() {
+      return new TokenSwapConfig(this);
+    }
+
+    /// <summary>Field number for the "token_swap_list" field.</summary>
+    public const int TokenSwapListFieldNumber = 1;
+    private global::AetherLink.Contracts.Ramp.TokenSwapList tokenSwapList_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AetherLink.Contracts.Ramp.TokenSwapList TokenSwapList {
+      get { return tokenSwapList_; }
+      set {
+        tokenSwapList_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TokenSwapConfig);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TokenSwapConfig other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(TokenSwapList, other.TokenSwapList)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (tokenSwapList_ != null) hash ^= TokenSwapList.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (tokenSwapList_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (tokenSwapList_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (tokenSwapList_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TokenSwapConfig other) {
+      if (other == null) {
+        return;
+      }
+      if (other.tokenSwapList_ != null) {
+        if (tokenSwapList_ == null) {
+          TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+        }
+        TokenSwapList.MergeFrom(other.TokenSwapList);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (tokenSwapList_ == null) {
+              TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+            }
+            input.ReadMessage(TokenSwapList);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (tokenSwapList_ == null) {
+              TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+            }
+            input.ReadMessage(TokenSwapList);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TokenSwapList : pb::IMessage<TokenSwapList>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TokenSwapList> _parser = new pb::MessageParser<TokenSwapList>(() => new TokenSwapList());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TokenSwapList> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapList() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapList(TokenSwapList other) : this() {
+      tokenSwapInfoList_ = other.tokenSwapInfoList_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapList Clone() {
+      return new TokenSwapList(this);
+    }
+
+    /// <summary>Field number for the "token_swap_info_list" field.</summary>
+    public const int TokenSwapInfoListFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::AetherLink.Contracts.Ramp.TokenSwapInfo> _repeated_tokenSwapInfoList_codec
+        = pb::FieldCodec.ForMessage(10, global::AetherLink.Contracts.Ramp.TokenSwapInfo.Parser);
+    private readonly pbc::RepeatedField<global::AetherLink.Contracts.Ramp.TokenSwapInfo> tokenSwapInfoList_ = new pbc::RepeatedField<global::AetherLink.Contracts.Ramp.TokenSwapInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::AetherLink.Contracts.Ramp.TokenSwapInfo> TokenSwapInfoList {
+      get { return tokenSwapInfoList_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TokenSwapList);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TokenSwapList other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!tokenSwapInfoList_.Equals(other.tokenSwapInfoList_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= tokenSwapInfoList_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      tokenSwapInfoList_.WriteTo(output, _repeated_tokenSwapInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      tokenSwapInfoList_.WriteTo(ref output, _repeated_tokenSwapInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += tokenSwapInfoList_.CalculateSize(_repeated_tokenSwapInfoList_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TokenSwapList other) {
+      if (other == null) {
+        return;
+      }
+      tokenSwapInfoList_.Add(other.tokenSwapInfoList_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            tokenSwapInfoList_.AddEntriesFrom(input, _repeated_tokenSwapInfoList_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            tokenSwapInfoList_.AddEntriesFrom(ref input, _repeated_tokenSwapInfoList_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TokenSwapInfo : pb::IMessage<TokenSwapInfo>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TokenSwapInfo> _parser = new pb::MessageParser<TokenSwapInfo>(() => new TokenSwapInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TokenSwapInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapInfo(TokenSwapInfo other) : this() {
+      targetChainId_ = other.targetChainId_;
+      targetContractAddress_ = other.targetContractAddress_;
+      tokenAddress_ = other.tokenAddress_;
+      originToken_ = other.originToken_;
+      swapId_ = other.swapId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapInfo Clone() {
+      return new TokenSwapInfo(this);
+    }
+
+    /// <summary>Field number for the "target_chain_id" field.</summary>
+    public const int TargetChainIdFieldNumber = 1;
+    private long targetChainId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long TargetChainId {
+      get { return targetChainId_; }
+      set {
+        targetChainId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_contract_address" field.</summary>
+    public const int TargetContractAddressFieldNumber = 2;
+    private string targetContractAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TargetContractAddress {
+      get { return targetContractAddress_; }
+      set {
+        targetContractAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_address" field.</summary>
+    public const int TokenAddressFieldNumber = 3;
+    private string tokenAddress_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TokenAddress {
+      get { return tokenAddress_; }
+      set {
+        tokenAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "origin_token" field.</summary>
+    public const int OriginTokenFieldNumber = 4;
+    private string originToken_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OriginToken {
+      get { return originToken_; }
+      set {
+        originToken_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "swap_id" field.</summary>
+    public const int SwapIdFieldNumber = 5;
+    private string swapId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SwapId {
+      get { return swapId_; }
+      set {
+        swapId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TokenSwapInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TokenSwapInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TargetChainId != other.TargetChainId) return false;
+      if (TargetContractAddress != other.TargetContractAddress) return false;
+      if (TokenAddress != other.TokenAddress) return false;
+      if (OriginToken != other.OriginToken) return false;
+      if (SwapId != other.SwapId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
+      if (TargetContractAddress.Length != 0) hash ^= TargetContractAddress.GetHashCode();
+      if (TokenAddress.Length != 0) hash ^= TokenAddress.GetHashCode();
+      if (OriginToken.Length != 0) hash ^= OriginToken.GetHashCode();
+      if (SwapId.Length != 0) hash ^= SwapId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (TargetChainId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(TargetChainId);
+      }
+      if (TargetContractAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetContractAddress);
+      }
+      if (TokenAddress.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(TokenAddress);
+      }
+      if (OriginToken.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(OriginToken);
+      }
+      if (SwapId.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(SwapId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TargetChainId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(TargetChainId);
+      }
+      if (TargetContractAddress.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TargetContractAddress);
+      }
+      if (TokenAddress.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(TokenAddress);
+      }
+      if (OriginToken.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(OriginToken);
+      }
+      if (SwapId.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(SwapId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (TargetChainId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetChainId);
+      }
+      if (TargetContractAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TargetContractAddress);
+      }
+      if (TokenAddress.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TokenAddress);
+      }
+      if (OriginToken.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OriginToken);
+      }
+      if (SwapId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SwapId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TokenSwapInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TargetChainId != 0L) {
+        TargetChainId = other.TargetChainId;
+      }
+      if (other.TargetContractAddress.Length != 0) {
+        TargetContractAddress = other.TargetContractAddress;
+      }
+      if (other.TokenAddress.Length != 0) {
+        TokenAddress = other.TokenAddress;
+      }
+      if (other.OriginToken.Length != 0) {
+        OriginToken = other.OriginToken;
+      }
+      if (other.SwapId.Length != 0) {
+        SwapId = other.SwapId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            TargetChainId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            TargetContractAddress = input.ReadString();
+            break;
+          }
+          case 26: {
+            TokenAddress = input.ReadString();
+            break;
+          }
+          case 34: {
+            OriginToken = input.ReadString();
+            break;
+          }
+          case 42: {
+            SwapId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            TargetChainId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            TargetContractAddress = input.ReadString();
+            break;
+          }
+          case 26: {
+            TokenAddress = input.ReadString();
+            break;
+          }
+          case 34: {
+            OriginToken = input.ReadString();
+            break;
+          }
+          case 42: {
+            SwapId = input.ReadString();
             break;
           }
         }
@@ -2490,7 +3559,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[9]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2688,7 +3757,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[10]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2886,7 +3955,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[11]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3084,7 +4153,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[12]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3104,12 +4173,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CommitReportAccepted(CommitReportAccepted other) : this() {
-      messageId_ = other.messageId_ != null ? other.messageId_.Clone() : null;
-      sourceChainId_ = other.sourceChainId_;
-      targetChainId_ = other.targetChainId_;
-      sender_ = other.sender_;
-      receiver_ = other.receiver_ != null ? other.receiver_.Clone() : null;
-      report_ = other.report_;
+      report_ = other.report_ != null ? other.report_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3119,75 +4183,15 @@ namespace AetherLink.Contracts.Ramp {
       return new CommitReportAccepted(this);
     }
 
-    /// <summary>Field number for the "message_id" field.</summary>
-    public const int MessageIdFieldNumber = 1;
-    private global::AElf.Types.Hash messageId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::AElf.Types.Hash MessageId {
-      get { return messageId_; }
-      set {
-        messageId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "source_chain_id" field.</summary>
-    public const int SourceChainIdFieldNumber = 2;
-    private long sourceChainId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long SourceChainId {
-      get { return sourceChainId_; }
-      set {
-        sourceChainId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "target_chain_id" field.</summary>
-    public const int TargetChainIdFieldNumber = 3;
-    private long targetChainId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long TargetChainId {
-      get { return targetChainId_; }
-      set {
-        targetChainId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "sender" field.</summary>
-    public const int SenderFieldNumber = 4;
-    private pb::ByteString sender_ = pb::ByteString.Empty;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Sender {
-      get { return sender_; }
-      set {
-        sender_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "receiver" field.</summary>
-    public const int ReceiverFieldNumber = 5;
-    private global::AElf.Types.Address receiver_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::AElf.Types.Address Receiver {
-      get { return receiver_; }
-      set {
-        receiver_ = value;
-      }
-    }
-
     /// <summary>Field number for the "report" field.</summary>
-    public const int ReportFieldNumber = 6;
-    private pb::ByteString report_ = pb::ByteString.Empty;
+    public const int ReportFieldNumber = 1;
+    private global::AetherLink.Contracts.Ramp.Report report_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Report {
+    public global::AetherLink.Contracts.Ramp.Report Report {
       get { return report_; }
       set {
-        report_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        report_ = value;
       }
     }
 
@@ -3206,12 +4210,7 @@ namespace AetherLink.Contracts.Ramp {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(MessageId, other.MessageId)) return false;
-      if (SourceChainId != other.SourceChainId) return false;
-      if (TargetChainId != other.TargetChainId) return false;
-      if (Sender != other.Sender) return false;
-      if (!object.Equals(Receiver, other.Receiver)) return false;
-      if (Report != other.Report) return false;
+      if (!object.Equals(Report, other.Report)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3219,12 +4218,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (messageId_ != null) hash ^= MessageId.GetHashCode();
-      if (SourceChainId != 0L) hash ^= SourceChainId.GetHashCode();
-      if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
-      if (Sender.Length != 0) hash ^= Sender.GetHashCode();
-      if (receiver_ != null) hash ^= Receiver.GetHashCode();
-      if (Report.Length != 0) hash ^= Report.GetHashCode();
+      if (report_ != null) hash ^= Report.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3243,29 +4237,9 @@ namespace AetherLink.Contracts.Ramp {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (messageId_ != null) {
+      if (report_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(MessageId);
-      }
-      if (SourceChainId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(SourceChainId);
-      }
-      if (TargetChainId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(TargetChainId);
-      }
-      if (Sender.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteBytes(Sender);
-      }
-      if (receiver_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(Receiver);
-      }
-      if (Report.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteBytes(Report);
+        output.WriteMessage(Report);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3277,29 +4251,9 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (messageId_ != null) {
+      if (report_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(MessageId);
-      }
-      if (SourceChainId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(SourceChainId);
-      }
-      if (TargetChainId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(TargetChainId);
-      }
-      if (Sender.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteBytes(Sender);
-      }
-      if (receiver_ != null) {
-        output.WriteRawTag(42);
-        output.WriteMessage(Receiver);
-      }
-      if (Report.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteBytes(Report);
+        output.WriteMessage(Report);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -3311,23 +4265,8 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (messageId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageId);
-      }
-      if (SourceChainId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SourceChainId);
-      }
-      if (TargetChainId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetChainId);
-      }
-      if (Sender.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Sender);
-      }
-      if (receiver_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Receiver);
-      }
-      if (Report.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Report);
+      if (report_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Report);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3341,29 +4280,11 @@ namespace AetherLink.Contracts.Ramp {
       if (other == null) {
         return;
       }
-      if (other.messageId_ != null) {
-        if (messageId_ == null) {
-          MessageId = new global::AElf.Types.Hash();
+      if (other.report_ != null) {
+        if (report_ == null) {
+          Report = new global::AetherLink.Contracts.Ramp.Report();
         }
-        MessageId.MergeFrom(other.MessageId);
-      }
-      if (other.SourceChainId != 0L) {
-        SourceChainId = other.SourceChainId;
-      }
-      if (other.TargetChainId != 0L) {
-        TargetChainId = other.TargetChainId;
-      }
-      if (other.Sender.Length != 0) {
-        Sender = other.Sender;
-      }
-      if (other.receiver_ != null) {
-        if (receiver_ == null) {
-          Receiver = new global::AElf.Types.Address();
-        }
-        Receiver.MergeFrom(other.Receiver);
-      }
-      if (other.Report.Length != 0) {
-        Report = other.Report;
+        Report.MergeFrom(other.Report);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3381,33 +4302,10 @@ namespace AetherLink.Contracts.Ramp {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (messageId_ == null) {
-              MessageId = new global::AElf.Types.Hash();
+            if (report_ == null) {
+              Report = new global::AetherLink.Contracts.Ramp.Report();
             }
-            input.ReadMessage(MessageId);
-            break;
-          }
-          case 16: {
-            SourceChainId = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            TargetChainId = input.ReadInt64();
-            break;
-          }
-          case 34: {
-            Sender = input.ReadBytes();
-            break;
-          }
-          case 42: {
-            if (receiver_ == null) {
-              Receiver = new global::AElf.Types.Address();
-            }
-            input.ReadMessage(Receiver);
-            break;
-          }
-          case 50: {
-            Report = input.ReadBytes();
+            input.ReadMessage(Report);
             break;
           }
         }
@@ -3426,33 +4324,10 @@ namespace AetherLink.Contracts.Ramp {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (messageId_ == null) {
-              MessageId = new global::AElf.Types.Hash();
+            if (report_ == null) {
+              Report = new global::AetherLink.Contracts.Ramp.Report();
             }
-            input.ReadMessage(MessageId);
-            break;
-          }
-          case 16: {
-            SourceChainId = input.ReadInt64();
-            break;
-          }
-          case 24: {
-            TargetChainId = input.ReadInt64();
-            break;
-          }
-          case 34: {
-            Sender = input.ReadBytes();
-            break;
-          }
-          case 42: {
-            if (receiver_ == null) {
-              Receiver = new global::AElf.Types.Address();
-            }
-            input.ReadMessage(Receiver);
-            break;
-          }
-          case 50: {
-            Report = input.ReadBytes();
+            input.ReadMessage(Report);
             break;
           }
         }
@@ -3476,7 +4351,7 @@ namespace AetherLink.Contracts.Ramp {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[13]; }
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3498,9 +4373,11 @@ namespace AetherLink.Contracts.Ramp {
     public SendRequested(SendRequested other) : this() {
       messageId_ = other.messageId_ != null ? other.messageId_.Clone() : null;
       targetChainId_ = other.targetChainId_;
+      sourceChainId_ = other.sourceChainId_;
       receiver_ = other.receiver_;
       sender_ = other.sender_;
-      data_ = other.data_;
+      message_ = other.message_;
+      tokenAmount_ = other.tokenAmount_ != null ? other.tokenAmount_.Clone() : null;
       epoch_ = other.epoch_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -3535,8 +4412,20 @@ namespace AetherLink.Contracts.Ramp {
       }
     }
 
+    /// <summary>Field number for the "source_chain_id" field.</summary>
+    public const int SourceChainIdFieldNumber = 3;
+    private long sourceChainId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long SourceChainId {
+      get { return sourceChainId_; }
+      set {
+        sourceChainId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "receiver" field.</summary>
-    public const int ReceiverFieldNumber = 3;
+    public const int ReceiverFieldNumber = 4;
     private pb::ByteString receiver_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3548,7 +4437,7 @@ namespace AetherLink.Contracts.Ramp {
     }
 
     /// <summary>Field number for the "sender" field.</summary>
-    public const int SenderFieldNumber = 4;
+    public const int SenderFieldNumber = 5;
     private pb::ByteString sender_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3559,20 +4448,32 @@ namespace AetherLink.Contracts.Ramp {
       }
     }
 
-    /// <summary>Field number for the "data" field.</summary>
-    public const int DataFieldNumber = 5;
-    private pb::ByteString data_ = pb::ByteString.Empty;
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 6;
+    private pb::ByteString message_ = pb::ByteString.Empty;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pb::ByteString Data {
-      get { return data_; }
+    public pb::ByteString Message {
+      get { return message_; }
       set {
-        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_amount" field.</summary>
+    public const int TokenAmountFieldNumber = 7;
+    private global::Ramp.TokenAmount tokenAmount_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Ramp.TokenAmount TokenAmount {
+      get { return tokenAmount_; }
+      set {
+        tokenAmount_ = value;
       }
     }
 
     /// <summary>Field number for the "epoch" field.</summary>
-    public const int EpochFieldNumber = 6;
+    public const int EpochFieldNumber = 8;
     private long epoch_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3600,9 +4501,11 @@ namespace AetherLink.Contracts.Ramp {
       }
       if (!object.Equals(MessageId, other.MessageId)) return false;
       if (TargetChainId != other.TargetChainId) return false;
+      if (SourceChainId != other.SourceChainId) return false;
       if (Receiver != other.Receiver) return false;
       if (Sender != other.Sender) return false;
-      if (Data != other.Data) return false;
+      if (Message != other.Message) return false;
+      if (!object.Equals(TokenAmount, other.TokenAmount)) return false;
       if (Epoch != other.Epoch) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3613,9 +4516,11 @@ namespace AetherLink.Contracts.Ramp {
       int hash = 1;
       if (messageId_ != null) hash ^= MessageId.GetHashCode();
       if (TargetChainId != 0L) hash ^= TargetChainId.GetHashCode();
+      if (SourceChainId != 0L) hash ^= SourceChainId.GetHashCode();
       if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (Sender.Length != 0) hash ^= Sender.GetHashCode();
-      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (tokenAmount_ != null) hash ^= TokenAmount.GetHashCode();
       if (Epoch != 0L) hash ^= Epoch.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3643,20 +4548,28 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(16);
         output.WriteInt64(TargetChainId);
       }
+      if (SourceChainId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(SourceChainId);
+      }
       if (Receiver.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteBytes(Receiver);
       }
       if (Sender.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteBytes(Sender);
       }
-      if (Data.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteBytes(Data);
+      if (Message.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(TokenAmount);
       }
       if (Epoch != 0L) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(64);
         output.WriteInt64(Epoch);
       }
       if (_unknownFields != null) {
@@ -3677,20 +4590,28 @@ namespace AetherLink.Contracts.Ramp {
         output.WriteRawTag(16);
         output.WriteInt64(TargetChainId);
       }
+      if (SourceChainId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(SourceChainId);
+      }
       if (Receiver.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteBytes(Receiver);
       }
       if (Sender.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteBytes(Sender);
       }
-      if (Data.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteBytes(Data);
+      if (Message.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Message);
+      }
+      if (tokenAmount_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(TokenAmount);
       }
       if (Epoch != 0L) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(64);
         output.WriteInt64(Epoch);
       }
       if (_unknownFields != null) {
@@ -3709,14 +4630,20 @@ namespace AetherLink.Contracts.Ramp {
       if (TargetChainId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetChainId);
       }
+      if (SourceChainId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SourceChainId);
+      }
       if (Receiver.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Receiver);
       }
       if (Sender.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeBytesSize(Sender);
       }
-      if (Data.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Message);
+      }
+      if (tokenAmount_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenAmount);
       }
       if (Epoch != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Epoch);
@@ -3742,14 +4669,23 @@ namespace AetherLink.Contracts.Ramp {
       if (other.TargetChainId != 0L) {
         TargetChainId = other.TargetChainId;
       }
+      if (other.SourceChainId != 0L) {
+        SourceChainId = other.SourceChainId;
+      }
       if (other.Receiver.Length != 0) {
         Receiver = other.Receiver;
       }
       if (other.Sender.Length != 0) {
         Sender = other.Sender;
       }
-      if (other.Data.Length != 0) {
-        Data = other.Data;
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      if (other.tokenAmount_ != null) {
+        if (tokenAmount_ == null) {
+          TokenAmount = new global::Ramp.TokenAmount();
+        }
+        TokenAmount.MergeFrom(other.TokenAmount);
       }
       if (other.Epoch != 0L) {
         Epoch = other.Epoch;
@@ -3780,19 +4716,30 @@ namespace AetherLink.Contracts.Ramp {
             TargetChainId = input.ReadInt64();
             break;
           }
-          case 26: {
-            Receiver = input.ReadBytes();
+          case 24: {
+            SourceChainId = input.ReadInt64();
             break;
           }
           case 34: {
-            Sender = input.ReadBytes();
+            Receiver = input.ReadBytes();
             break;
           }
           case 42: {
-            Data = input.ReadBytes();
+            Sender = input.ReadBytes();
             break;
           }
-          case 48: {
+          case 50: {
+            Message = input.ReadBytes();
+            break;
+          }
+          case 58: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
+            break;
+          }
+          case 64: {
             Epoch = input.ReadInt64();
             break;
           }
@@ -3822,20 +4769,961 @@ namespace AetherLink.Contracts.Ramp {
             TargetChainId = input.ReadInt64();
             break;
           }
-          case 26: {
-            Receiver = input.ReadBytes();
+          case 24: {
+            SourceChainId = input.ReadInt64();
             break;
           }
           case 34: {
-            Sender = input.ReadBytes();
+            Receiver = input.ReadBytes();
             break;
           }
           case 42: {
-            Data = input.ReadBytes();
+            Sender = input.ReadBytes();
             break;
           }
-          case 48: {
+          case 50: {
+            Message = input.ReadBytes();
+            break;
+          }
+          case 58: {
+            if (tokenAmount_ == null) {
+              TokenAmount = new global::Ramp.TokenAmount();
+            }
+            input.ReadMessage(TokenAmount);
+            break;
+          }
+          case 64: {
             Epoch = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class RequestCancelled : pb::IMessage<RequestCancelled>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<RequestCancelled> _parser = new pb::MessageParser<RequestCancelled>(() => new RequestCancelled());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<RequestCancelled> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RequestCancelled() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RequestCancelled(RequestCancelled other) : this() {
+      messageId_ = other.messageId_ != null ? other.messageId_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RequestCancelled Clone() {
+      return new RequestCancelled(this);
+    }
+
+    /// <summary>Field number for the "message_id" field.</summary>
+    public const int MessageIdFieldNumber = 1;
+    private global::AElf.Types.Hash messageId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Hash MessageId {
+      get { return messageId_; }
+      set {
+        messageId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as RequestCancelled);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(RequestCancelled other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(MessageId, other.MessageId)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (messageId_ != null) hash ^= MessageId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (messageId_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(MessageId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (messageId_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(MessageId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (messageId_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MessageId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(RequestCancelled other) {
+      if (other == null) {
+        return;
+      }
+      if (other.messageId_ != null) {
+        if (messageId_ == null) {
+          MessageId = new global::AElf.Types.Hash();
+        }
+        MessageId.MergeFrom(other.MessageId);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (messageId_ == null) {
+              MessageId = new global::AElf.Types.Hash();
+            }
+            input.ReadMessage(MessageId);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (messageId_ == null) {
+              MessageId = new global::AElf.Types.Hash();
+            }
+            input.ReadMessage(MessageId);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class AdminTransferRequested : pb::IMessage<AdminTransferRequested>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AdminTransferRequested> _parser = new pb::MessageParser<AdminTransferRequested>(() => new AdminTransferRequested());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AdminTransferRequested> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferRequested() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferRequested(AdminTransferRequested other) : this() {
+      from_ = other.from_ != null ? other.from_.Clone() : null;
+      to_ = other.to_ != null ? other.to_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferRequested Clone() {
+      return new AdminTransferRequested(this);
+    }
+
+    /// <summary>Field number for the "from" field.</summary>
+    public const int FromFieldNumber = 1;
+    private global::AElf.Types.Address from_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Address From {
+      get { return from_; }
+      set {
+        from_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "to" field.</summary>
+    public const int ToFieldNumber = 2;
+    private global::AElf.Types.Address to_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Address To {
+      get { return to_; }
+      set {
+        to_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AdminTransferRequested);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AdminTransferRequested other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(From, other.From)) return false;
+      if (!object.Equals(To, other.To)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (from_ != null) hash ^= From.GetHashCode();
+      if (to_ != null) hash ^= To.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (from_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(From);
+      }
+      if (to_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(To);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (from_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(From);
+      }
+      if (to_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(To);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (from_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(From);
+      }
+      if (to_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(To);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AdminTransferRequested other) {
+      if (other == null) {
+        return;
+      }
+      if (other.from_ != null) {
+        if (from_ == null) {
+          From = new global::AElf.Types.Address();
+        }
+        From.MergeFrom(other.From);
+      }
+      if (other.to_ != null) {
+        if (to_ == null) {
+          To = new global::AElf.Types.Address();
+        }
+        To.MergeFrom(other.To);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (from_ == null) {
+              From = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(From);
+            break;
+          }
+          case 18: {
+            if (to_ == null) {
+              To = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(To);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (from_ == null) {
+              From = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(From);
+            break;
+          }
+          case 18: {
+            if (to_ == null) {
+              To = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(To);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class AdminTransferred : pb::IMessage<AdminTransferred>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AdminTransferred> _parser = new pb::MessageParser<AdminTransferred>(() => new AdminTransferred());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AdminTransferred> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferred() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferred(AdminTransferred other) : this() {
+      from_ = other.from_ != null ? other.from_.Clone() : null;
+      to_ = other.to_ != null ? other.to_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AdminTransferred Clone() {
+      return new AdminTransferred(this);
+    }
+
+    /// <summary>Field number for the "from" field.</summary>
+    public const int FromFieldNumber = 1;
+    private global::AElf.Types.Address from_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Address From {
+      get { return from_; }
+      set {
+        from_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "to" field.</summary>
+    public const int ToFieldNumber = 2;
+    private global::AElf.Types.Address to_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Address To {
+      get { return to_; }
+      set {
+        to_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AdminTransferred);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AdminTransferred other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(From, other.From)) return false;
+      if (!object.Equals(To, other.To)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (from_ != null) hash ^= From.GetHashCode();
+      if (to_ != null) hash ^= To.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (from_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(From);
+      }
+      if (to_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(To);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (from_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(From);
+      }
+      if (to_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(To);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (from_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(From);
+      }
+      if (to_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(To);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AdminTransferred other) {
+      if (other == null) {
+        return;
+      }
+      if (other.from_ != null) {
+        if (from_ == null) {
+          From = new global::AElf.Types.Address();
+        }
+        From.MergeFrom(other.From);
+      }
+      if (other.to_ != null) {
+        if (to_ == null) {
+          To = new global::AElf.Types.Address();
+        }
+        To.MergeFrom(other.To);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (from_ == null) {
+              From = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(From);
+            break;
+          }
+          case 18: {
+            if (to_ == null) {
+              To = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(To);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (from_ == null) {
+              From = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(From);
+            break;
+          }
+          case 18: {
+            if (to_ == null) {
+              To = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(To);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TokenSwapConfigUpdated : pb::IMessage<TokenSwapConfigUpdated>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TokenSwapConfigUpdated> _parser = new pb::MessageParser<TokenSwapConfigUpdated>(() => new TokenSwapConfigUpdated());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TokenSwapConfigUpdated> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AetherLink.Contracts.Ramp.RampContractReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfigUpdated() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfigUpdated(TokenSwapConfigUpdated other) : this() {
+      contractAddress_ = other.contractAddress_ != null ? other.contractAddress_.Clone() : null;
+      tokenSwapList_ = other.tokenSwapList_ != null ? other.tokenSwapList_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TokenSwapConfigUpdated Clone() {
+      return new TokenSwapConfigUpdated(this);
+    }
+
+    /// <summary>Field number for the "contract_address" field.</summary>
+    public const int ContractAddressFieldNumber = 1;
+    private global::AElf.Types.Address contractAddress_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AElf.Types.Address ContractAddress {
+      get { return contractAddress_; }
+      set {
+        contractAddress_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "TokenSwapList" field.</summary>
+    public const int TokenSwapListFieldNumber = 2;
+    private global::AetherLink.Contracts.Ramp.TokenSwapList tokenSwapList_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::AetherLink.Contracts.Ramp.TokenSwapList TokenSwapList {
+      get { return tokenSwapList_; }
+      set {
+        tokenSwapList_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TokenSwapConfigUpdated);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TokenSwapConfigUpdated other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(ContractAddress, other.ContractAddress)) return false;
+      if (!object.Equals(TokenSwapList, other.TokenSwapList)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (contractAddress_ != null) hash ^= ContractAddress.GetHashCode();
+      if (tokenSwapList_ != null) hash ^= TokenSwapList.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (contractAddress_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ContractAddress);
+      }
+      if (tokenSwapList_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (contractAddress_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ContractAddress);
+      }
+      if (tokenSwapList_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (contractAddress_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ContractAddress);
+      }
+      if (tokenSwapList_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenSwapList);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TokenSwapConfigUpdated other) {
+      if (other == null) {
+        return;
+      }
+      if (other.contractAddress_ != null) {
+        if (contractAddress_ == null) {
+          ContractAddress = new global::AElf.Types.Address();
+        }
+        ContractAddress.MergeFrom(other.ContractAddress);
+      }
+      if (other.tokenSwapList_ != null) {
+        if (tokenSwapList_ == null) {
+          TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+        }
+        TokenSwapList.MergeFrom(other.TokenSwapList);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (contractAddress_ == null) {
+              ContractAddress = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(ContractAddress);
+            break;
+          }
+          case 18: {
+            if (tokenSwapList_ == null) {
+              TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+            }
+            input.ReadMessage(TokenSwapList);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (contractAddress_ == null) {
+              ContractAddress = new global::AElf.Types.Address();
+            }
+            input.ReadMessage(ContractAddress);
+            break;
+          }
+          case 18: {
+            if (tokenSwapList_ == null) {
+              TokenSwapList = new global::AetherLink.Contracts.Ramp.TokenSwapList();
+            }
+            input.ReadMessage(TokenSwapList);
             break;
           }
         }
