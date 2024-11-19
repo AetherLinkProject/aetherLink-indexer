@@ -1,3 +1,4 @@
+using System.Text;
 using AeFinder.Sdk;
 using AeFinder.Sdk.Processor;
 using AElf;
@@ -40,9 +41,13 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result.First().Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
         result.First().Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result.First().TargetChainId.ShouldBe(13);
-        result.First().Data.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
+        result.First().Message.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
         result.First().BlockHeight.ShouldBe(ctx1.Block.BlockHeight);
         result.First().Epoch.ShouldBe(0);
+        result.First().TokenAmount.TargetChainId.ShouldBe(1);
+        result.First().TokenAmount.TargetContractAddress.ShouldBe("ABC");
+        // result.First().TokenAmount.TokenAddress.ShouldBe("ABC");
+        result.First().TokenAmount.OriginToken.ShouldBe("ELF");
 
         var ctx2 = await MockSendRequested("test_message_id_2", 1);
         var result2 = await Query.RampRequestQueryAsync(_repository, _objectMapper,
@@ -54,7 +59,7 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result2[1].Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
         result2[1].Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result2[1].TargetChainId.ShouldBe(13);
-        result2[1].Data.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
+        result2[1].Message.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
         result2[1].BlockHeight.ShouldBe(ctx2.Block.BlockHeight);
         result2[1].Epoch.ShouldBe(1);
     }
@@ -67,7 +72,13 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
             TargetChainId = 13,
             Receiver = Address.FromPublicKey("AAA".HexToByteArray()).ToByteString(),
             Sender = Address.FromPublicKey("BBB".HexToByteArray()).ToByteString(),
-            Data = HashHelper.ComputeFrom("Message Data").ToByteString(),
+            Message = HashHelper.ComputeFrom("Message Data").ToByteString(),
+            TokenAmount = new()
+            {
+                TargetChainId = 1,
+                TargetContractAddress = "ABC",
+                OriginToken = "ELF"
+            },
             Epoch = epoch
         };
 

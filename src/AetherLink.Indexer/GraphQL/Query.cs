@@ -45,6 +45,18 @@ public class Query
         return objectMapper.Map<List<RequestCancelledIndex>, List<RequestCancelledDto>>(queryable.ToList());
     }
 
+    [Name("rampRequestCancelled")]
+    public static async Task<List<RampRequestCancelledDto>> RampRequestCancelledQueryAsync(
+        [FromServices] IReadOnlyRepository<RampRequestCancelledIndex> repository,
+        [FromServices] IObjectMapper objectMapper, RequestCancelledInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<RampRequestCancelledIndex>, List<RampRequestCancelledDto>>(queryable.ToList());
+    }
+
     [Name("requestCommitment")]
     public static async Task<CommitmentDto> RequestCommitmentQueryAsync(
         [FromServices] IReadOnlyRepository<OcrJobEventIndex> repository, [FromServices] IObjectMapper objectMapper,
@@ -104,10 +116,45 @@ public class Query
         [FromServices] IObjectMapper objectMapper, TransactionEventQueryInput input)
     {
         var queryable = await repository.GetQueryableAsync();
-        var temp = queryable.ToList();
         queryable = queryable.Where(a => a.ChainId == input.ChainId
                                          && a.BlockHeight <= input.ToBlockHeight
                                          && a.BlockHeight >= input.FromBlockHeight);
         return objectMapper.Map<List<RampSendRequestedIndex>, List<RampRequestDto>>(queryable.ToList());
+    }
+
+    [Name("rampCommitReport")]
+    public static async Task<List<RampCommitReportAcceptedDto>> RampCommitReportQueryAsync(
+        [FromServices] IReadOnlyRepository<RampCommitReportAcceptedIndex> repository,
+        [FromServices] IObjectMapper objectMapper, TransactionEventQueryInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<RampCommitReportAcceptedIndex>, List<RampCommitReportAcceptedDto>>(
+            queryable.ToList());
+    }
+
+    [Name("tokenSwapConfig")]
+    public static async Task<TokenSwapConfigDto> TokenSwapConfigQueryAsync(
+        [FromServices] IReadOnlyRepository<TokenSwapConfigInfoIndex> repository,
+        [FromServices] IObjectMapper objectMapper, TokenSwapConfigQueryInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a =>
+            a.TargetContractAddress == input.TargetContractAddress && a.TargetChainId == input.TargetChainId);
+
+        if (!input.OriginToken.IsNullOrWhiteSpace())
+        {
+            queryable = queryable.Where(a => a.OriginToken == input.OriginToken);
+        }
+
+        if (!input.TokenAddress.IsNullOrWhiteSpace())
+        {
+            queryable = queryable.Where(a => a.TokenAddress == input.TokenAddress);
+        }
+
+        // var result = queryable.FirstOrDefault();
+        return objectMapper.Map<TokenSwapConfigInfoIndex, TokenSwapConfigDto>(queryable.FirstOrDefault());
     }
 }

@@ -24,8 +24,8 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
         var chainId = context.ChainId;
         var messageId = ByteString.CopyFrom(logEvent.MessageId.ToByteArray()).ToBase64();
 
-        _logger.LogDebug("[Ramp Request] chainId:{chainId}, messageId:{reqId}, blockHeight:{height}", chainId,
-            messageId, context.Block.BlockHeight);
+        _logger.LogDebug("[Ramp Request] chainId:{chainId}, messageId:{reqId}, blockHeight:{height}",
+            chainId, messageId, context.Block.BlockHeight);
 
         var indexId = IdGenerateHelper.GetOcrId(chainId, messageId);
         if (await GetEntityAsync<RampSendRequestedIndex>(indexId) != null) return;
@@ -40,7 +40,13 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
             SourceChainId = ChainHelper.ConvertBase58ToChainId(context.ChainId),
             Sender = logEvent.Sender.ToBase64(),
             Receiver = logEvent.Receiver.ToBase64(),
-            Data = logEvent.Data.ToBase64(),
+            Message = logEvent.Message.ToBase64(),
+            TokenAmount = new()
+            {
+                TargetChainId = logEvent.TokenAmount.TargetChainId,
+                TargetContractAddress = logEvent.TokenAmount.TargetContractAddress,
+                OriginToken = logEvent.TokenAmount.OriginToken
+            },
             Epoch = logEvent.Epoch,
             StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds()
         });
