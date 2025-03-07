@@ -11,7 +11,7 @@ public class RampRequestDto
     public string Sender { get; set; }
     public string Receiver { get; set; }
     public string Message { get; set; }
-    public TokenSwapConfigDto TokenAmount { get; set; }
+    public TokenTransferMetadataLogEventDto? TokenTransferMetadata { get; set; }
     public long Epoch { get; set; }
     public long StartTime { get; set; }
 }

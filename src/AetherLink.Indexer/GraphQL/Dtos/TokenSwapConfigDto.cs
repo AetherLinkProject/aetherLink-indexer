@@ -2,9 +2,10 @@ namespace AetherLink.Indexer.GraphQL.Dtos;
 
 public class TokenSwapConfigDto
 {
-    public string SwapId { get; set; }
     public long TargetChainId { get; set; }
-    public string TargetContractAddress { get; set; }
+    public long SourceChainId { get; set; }
+    public string Receiver { get; set; }
     public string TokenAddress { get; set; }
-    public string OriginToken { get; set; }
+    public string Symbol { get; set; }
+    public string ExtraData { get; set; }
 }

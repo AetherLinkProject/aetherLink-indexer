@@ -37,17 +37,15 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result.Count.ShouldBe(1);
         result.First().ChainId.ShouldBe("AELF");
         result.First().MessageId
-            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id").ToByteArray()).ToBase64());
-        result.First().Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
+            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id").ToByteArray()).ToHex());
+        result.First().Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToBase58());
         result.First().Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result.First().TargetChainId.ShouldBe(13);
         result.First().Message.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
         result.First().BlockHeight.ShouldBe(ctx1.Block.BlockHeight);
         result.First().Epoch.ShouldBe(0);
-        result.First().TokenAmount.TargetChainId.ShouldBe(1);
-        result.First().TokenAmount.TargetContractAddress.ShouldBe("ABC");
-        // result.First().TokenAmount.TokenAddress.ShouldBe("ABC");
-        result.First().TokenAmount.OriginToken.ShouldBe("ELF");
+        result.First().TokenTransferMetadata.TargetChainId.ShouldBe(1);
+        result.First().TokenTransferMetadata.Symbol.ShouldBe("ELF");
 
         var ctx2 = await MockSendRequested("test_message_id_2", 1);
         var result2 = await Query.RampRequestQueryAsync(_repository, _objectMapper,
@@ -55,8 +53,8 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
         result2.Count.ShouldBe(2);
         result2[1].ChainId.ShouldBe("AELF");
         result2[1].MessageId
-            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id_2").ToByteArray()).ToBase64());
-        result2[1].Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToByteString().ToBase64());
+            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id_2").ToByteArray()).ToHex());
+        result2[1].Sender.ShouldBe(Address.FromPublicKey("BBB".HexToByteArray()).ToBase58());
         result2[1].Receiver.ShouldBe(Address.FromPublicKey("AAA".HexToByteArray()).ToByteString().ToBase64());
         result2[1].TargetChainId.ShouldBe(13);
         result2[1].Message.ShouldBe(HashHelper.ComputeFrom("Message Data").ToByteString().ToBase64());
@@ -71,13 +69,12 @@ public class RampSendRequestedLogEventProcessorTest : AetherLinkIndexerTestBase
             MessageId = HashHelper.ComputeFrom(messageId),
             TargetChainId = 13,
             Receiver = Address.FromPublicKey("AAA".HexToByteArray()).ToByteString(),
-            Sender = Address.FromPublicKey("BBB".HexToByteArray()).ToByteString(),
+            Sender = Address.FromPublicKey("BBB".HexToByteArray()),
             Message = HashHelper.ComputeFrom("Message Data").ToByteString(),
-            TokenAmount = new()
+            TokenTransferMetadata = new()
             {
                 TargetChainId = 1,
-                TargetContractAddress = "ABC",
-                OriginToken = "ELF"
+                Symbol = "ELF"
             },
             Epoch = epoch
         };

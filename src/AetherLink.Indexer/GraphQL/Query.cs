@@ -57,6 +57,19 @@ public class Query
         return objectMapper.Map<List<RampRequestCancelledIndex>, List<RampRequestCancelledDto>>(queryable.ToList());
     }
 
+    [Name("rampRequestManuallyExecuted")]
+    public static async Task<List<RampRequestManuallyExecutedDto>> RampRequestManuallyExecuteQueryAsync(
+        [FromServices] IReadOnlyRepository<RampRequestManuallyExecutedIndex> repository,
+        [FromServices] IObjectMapper objectMapper, RequestManuallyExecutedInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a => a.ChainId == input.ChainId
+                                         && a.BlockHeight <= input.ToBlockHeight
+                                         && a.BlockHeight >= input.FromBlockHeight);
+        return objectMapper.Map<List<RampRequestManuallyExecutedIndex>, List<RampRequestManuallyExecutedDto>>(
+            queryable.ToList());
+    }
+
     [Name("requestCommitment")]
     public static async Task<CommitmentDto> RequestCommitmentQueryAsync(
         [FromServices] IReadOnlyRepository<OcrJobEventIndex> repository, [FromServices] IObjectMapper objectMapper,
@@ -142,11 +155,13 @@ public class Query
     {
         var queryable = await repository.GetQueryableAsync();
         queryable = queryable.Where(a =>
-            a.TargetContractAddress == input.TargetContractAddress && a.TargetChainId == input.TargetChainId);
+            a.Receiver == input.Receiver &&
+            a.SourceChainId == input.SourceChainId &&
+            a.TargetChainId == input.TargetChainId);
 
-        if (!input.OriginToken.IsNullOrWhiteSpace())
+        if (!input.Symbol.IsNullOrWhiteSpace())
         {
-            queryable = queryable.Where(a => a.OriginToken == input.OriginToken);
+            queryable = queryable.Where(a => a.Symbol == input.Symbol);
         }
 
         if (!input.TokenAddress.IsNullOrWhiteSpace())
@@ -154,7 +169,6 @@ public class Query
             queryable = queryable.Where(a => a.TokenAddress == input.TokenAddress);
         }
 
-        // var result = queryable.FirstOrDefault();
         return objectMapper.Map<TokenSwapConfigInfoIndex, TokenSwapConfigDto>(queryable.FirstOrDefault());
     }
 }

@@ -33,8 +33,11 @@ public class RampCommitReportAcceptedLogEventProcessor : LogEventProcessorBase<C
         {
             Id = indexId,
             ChainId = chainId,
+            SourceChainId = logEvent.Report.ReportContext.SourceChainId,
+            TargetChainId = logEvent.Report.ReportContext.TargetChainId,
             MessageId = messageId,
             BlockHeight = context.Block.BlockHeight,
+            TransactionId = context.Transaction.TransactionId
         });
     }
 }

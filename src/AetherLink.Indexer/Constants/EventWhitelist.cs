@@ -9,6 +9,10 @@ public static class EventWhitelist
         "ProposalReleased",
         "IrreversibleBlockFound",
         "SecretSharingInformation",
-        "ProposalCreated"
+        "ProposalCreated",
+        // CROSSCHAIN
+        "SideChainBlockDataIndexed",
+        "SideChainIndexed",
+        "CrossChainIndexingDataProposedEvent"
     };
 }

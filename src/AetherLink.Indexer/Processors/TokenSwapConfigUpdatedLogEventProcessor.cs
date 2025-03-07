@@ -45,11 +45,12 @@ public class TokenSwapConfigUpdatedLogEventProcessor : LogEventProcessorBase<Tok
             configCreatePendingTasks.Add(SaveEntityAsync(new TokenSwapConfigInfoIndex
             {
                 Id = configId,
-                SwapId = tokenSwapInfo.SwapId,
                 TargetChainId = tokenSwapInfo.TargetChainId,
-                TargetContractAddress = tokenSwapInfo.TargetContractAddress,
+                SourceChainId = tokenSwapInfo.SourceChainId,
+                Receiver = tokenSwapInfo.Receiver,
                 TokenAddress = tokenSwapInfo.TokenAddress,
-                OriginToken = tokenSwapInfo.OriginToken
+                Symbol = tokenSwapInfo.Symbol,
+                ExtraData = tokenSwapInfo.ExtraData.ToBase64()
             }));
         }
 

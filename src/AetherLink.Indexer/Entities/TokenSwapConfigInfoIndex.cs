@@ -5,9 +5,11 @@ namespace AetherLink.Indexer.Entities;
 
 public class TokenSwapConfigInfoIndex : AeFinderEntity, IAeFinderEntity
 {
-    [Keyword] public string SwapId { get; set; }
+    // [Keyword] public string SwapId { get; set; }
     public long TargetChainId { get; set; }
-    [Keyword] public string TargetContractAddress { get; set; }
+    public long SourceChainId { get; set; }
+    [Keyword] public string Receiver { get; set; }
     [Keyword] public string TokenAddress { get; set; }
-    [Keyword] public string OriginToken { get; set; }
+    [Keyword] public string Symbol { get; set; }
+    [Keyword] public string ExtraData { get; set; }
 }

@@ -5,6 +5,7 @@ using AetherLink.Contracts.Ramp;
 using aetherLink.indexer;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL;
+using Google.Protobuf;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Shouldly;
 using Volo.Abp.ObjectMapping;
@@ -33,29 +34,33 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
             new()
             {
                 TargetChainId = 1100,
-                TargetContractAddress = "ABC",
-                TokenAddress = "AAA",
-                OriginToken = "TEST1"
+                SourceChainId = 9100,
+                Receiver = "ABC",
+                // TokenAddress = "AAA",
+                Symbol = "TEST1"
             });
         result.TargetChainId.ShouldBe(1100);
-        result.TargetContractAddress.ShouldBe("ABC");
+        result.SourceChainId.ShouldBe(9100);
+        result.Receiver.ShouldBe("ABC");
         result.TokenAddress.ShouldBe("AAA");
-        result.OriginToken.ShouldBe("TEST1");
-        result.SwapId.ShouldBe("SwapId1");
+        result.Symbol.ShouldBe("TEST1");
+        result.ExtraData.ShouldBe(ByteString.CopyFromUtf8("SwapId1").ToBase64());
 
         var result2 = await Query.TokenSwapConfigQueryAsync(_repository, _objectMapper,
             new()
             {
                 TargetChainId = 1100,
-                TargetContractAddress = "EDF",
+                SourceChainId = 9100,
+                Receiver = "EDF",
                 TokenAddress = "EEE",
-                OriginToken = "TEST2",
+                // Symbol = "TEST2",
             });
         result2.TargetChainId.ShouldBe(1100);
-        result2.TargetContractAddress.ShouldBe("EDF");
+        result2.SourceChainId.ShouldBe(9100);
+        result2.Receiver.ShouldBe("EDF");
         result2.TokenAddress.ShouldBe("EEE");
-        result2.OriginToken.ShouldBe("TEST2");
-        result2.SwapId.ShouldBe("SwapId2");
+        result2.Symbol.ShouldBe("TEST2");
+        // result2.SwapId.ShouldBe("SwapId2");
     }
 
     private async Task MockTokenSwapConfigUpdated()
@@ -70,18 +75,20 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
                     new TokenSwapInfo
                     {
                         TargetChainId = 1100,
-                        TargetContractAddress = "ABC",
+                        SourceChainId = 9100,
+                        Receiver = "ABC",
                         TokenAddress = "AAA",
-                        OriginToken = "TEST1",
-                        SwapId = "SwapId1"
+                        Symbol = "TEST1",
+                        ExtraData = ByteString.CopyFromUtf8("SwapId1")
                     },
                     new TokenSwapInfo
                     {
                         TargetChainId = 1100,
-                        TargetContractAddress = "EDF",
+                        SourceChainId = 9100,
+                        Receiver = "EDF",
                         TokenAddress = "EEE",
-                        OriginToken = "TEST2",
-                        SwapId = "SwapId2"
+                        Symbol = "TEST2",
+                        ExtraData = ByteString.CopyFromUtf8("SwapId2")
                     },
                 }
             }

@@ -64,13 +64,12 @@ public class RampCommitReportAcceptedLogEventProcessorTests : AetherLinkIndexerT
                     Receiver = Address.FromPublicKey("AAA".HexToByteArray()).ToByteString()
                 },
                 Message = ByteString.CopyFrom("AAA".HexToByteArray()),
-                TokenAmount = new()
+                TokenTransferMetadata = new()
                 {
-                    SwapId = "test_SwapId",
                     TargetChainId = 1,
-                    TargetContractAddress = "test_TargetContractAddress",
                     TokenAddress = "test_TokenAddress",
-                    OriginToken = "test_OriginToken"
+                    Symbol = "test_OriginToken",
+                    ExtraData = ByteString.CopyFromUtf8("test_SwapId")
                 }
             }
         };

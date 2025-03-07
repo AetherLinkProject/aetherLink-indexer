@@ -10,6 +10,7 @@ public static class IdGenerateHelper
     private const string TransmittedPrefix = "transmitted";
     private const string RequestCancelPrefix = "requestcancel";
     private const string RampRequestCancelPrefix = "ramprequestcancel";
+    private const string RampRequestManuallyExecutePrefix = "ramprequestmanuallyexecute";
     private const string RampCommitReportAcceptedPrefix = "rampcommitreportaccepted";
     private const string TokenSwapConfigContractPrefix = "tokenswapconfigcontractprefix";
 
@@ -19,6 +20,9 @@ public static class IdGenerateHelper
 
     public static string GetRampRequestCancelId(string chainId, string messageId)
         => GetId(RampRequestCancelPrefix, chainId, messageId);
+
+    public static string GetRampRequestManuallyExecuteId(string chainId, string messageId, long blockHeight)
+        => GetId(RampRequestManuallyExecutePrefix, chainId, messageId, blockHeight);
 
     public static string GetRampCommitReportAcceptedId(string chainId, string messageId)
         => GetId(RampCommitReportAcceptedPrefix, chainId, messageId);
