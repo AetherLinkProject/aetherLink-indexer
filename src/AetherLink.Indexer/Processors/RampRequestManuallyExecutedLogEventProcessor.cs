@@ -35,7 +35,7 @@ public class RampRequestManuallyExecutedLogEventProcessor : LogEventProcessorBas
             ChainId = chainId,
             MessageId = messageId,
             TransactionId = context.Transaction.TransactionId,
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
+            StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds(),
             BlockHeight = blockHeight
         });
     }

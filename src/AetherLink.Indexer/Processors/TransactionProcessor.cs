@@ -35,7 +35,7 @@ public class TransactionProcessor : TransactionProcessorBase
                 ChainId = chainId,
                 TransactionId = transaction.TransactionId,
                 MethodName = transaction.MethodName,
-                StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
+                StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds(),
                 BlockHash = blockHash,
                 BlockHeight = blockHeight
             }, logEvent);

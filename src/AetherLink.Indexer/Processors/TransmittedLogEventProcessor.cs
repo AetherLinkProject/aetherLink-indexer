@@ -35,7 +35,7 @@ public class TransmittedLogEventProcessor : LogEventProcessorBase<Transmitted>
             TransactionId = context.Transaction.TransactionId,
             BlockHeight = context.Block.BlockHeight,
             RequestId = logEvent.RequestId.ToHex(),
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
+            StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds(),
             Epoch = logEvent.EpochAndRound
         });
     }

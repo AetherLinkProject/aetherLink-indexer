@@ -44,7 +44,7 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
             Message = logEvent.Message.ToBase64(),
             TokenTransferMetadata = new(),
             Epoch = logEvent.Epoch,
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds()
+            StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds()
         };
 
         if (logEvent.TokenTransferMetadata != null)

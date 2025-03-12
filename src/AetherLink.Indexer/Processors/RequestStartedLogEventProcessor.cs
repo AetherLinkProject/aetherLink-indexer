@@ -37,7 +37,7 @@ public class RequestStartedLogEventProcessor : LogEventProcessorBase<RequestStar
             RequestId = requestId,
             RequestTypeIndex = logEvent.RequestTypeIndex,
             TransactionId = context.Transaction.TransactionId,
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
+            StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds(),
             Commitment = logEvent.Commitment.ToBase64()
         });
     }
