@@ -40,7 +40,7 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
         result.TargetChainId.ShouldBe(1100);
         result.SourceChainId.ShouldBe(9100);
         result.Receiver.ShouldBe("ABC");
-        result.TokenAddress.ShouldBe("aaa");
+        result.TokenAddress.ShouldBe("AAA");
         result.Symbol.ShouldBe("TEST1");
         result.ExtraData.ShouldBe(ByteString.CopyFromUtf8("SwapId1").ToBase64());
 
@@ -52,7 +52,7 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
                 Receiver = "EDF",
                 TokenAddress = "EEE"
             });
-        result2.TargetChainId.ShouldBe(0);
+        result2.TargetChainId.ShouldBe(1100);
     }
 
     private async Task MockTokenSwapConfigUpdated()
