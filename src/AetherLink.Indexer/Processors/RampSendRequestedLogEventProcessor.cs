@@ -4,7 +4,6 @@ using AElf;
 using AetherLink.Contracts.Ramp;
 using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using Google.Protobuf;
 
 namespace AetherLink.Indexer.Processors;
 
@@ -22,7 +21,6 @@ public class RampSendRequestedLogEventProcessor : LogEventProcessorBase<SendRequ
     public override async Task ProcessAsync(SendRequested logEvent, LogEventContext context)
     {
         var chainId = context.ChainId;
-        // var messageId = ByteString.CopyFrom(logEvent.MessageId.ToByteArray()).ToBase64();
         var messageId = logEvent.MessageId.ToByteArray().ToHex();
 
         _logger.LogDebug("[Ramp Request] chainId:{chainId}, messageId:{reqId}, blockHeight:{height}",

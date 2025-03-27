@@ -155,9 +155,14 @@ public class Query
     {
         var queryable = await repository.GetQueryableAsync();
         queryable = queryable.Where(a =>
-            a.Receiver == input.Receiver &&
+            // a.Receiver == input.Receiver &&
             a.SourceChainId == input.SourceChainId &&
             a.TargetChainId == input.TargetChainId);
+        
+        if (!input.Receiver.IsNullOrWhiteSpace())
+        {
+            queryable = queryable.Where(a => a.Receiver == input.Receiver);
+        }
 
         if (!input.Symbol.IsNullOrWhiteSpace())
         {
@@ -169,6 +174,23 @@ public class Query
             queryable = queryable.Where(a => a.TokenAddress == input.TokenAddress);
         }
 
-        return objectMapper.Map<TokenSwapConfigInfoIndex, TokenSwapConfigDto>(queryable.FirstOrDefault());
+        var result = queryable.FirstOrDefault();
+
+        return result == null
+            ? new TokenSwapConfigDto()
+            : objectMapper.Map<TokenSwapConfigInfoIndex, TokenSwapConfigDto>(result);
+    }
+
+    [Name("tokenSwapConfigs")]
+    public static async Task<List<TokenSwapConfigDto>> TokenSwapConfigListQueryAsync(
+        [FromServices] IReadOnlyRepository<TokenSwapConfigInfoIndex> repository,
+        [FromServices] IObjectMapper objectMapper, TokenSwapConfigQueryListInput input)
+    {
+        var queryable = await repository.GetQueryableAsync();
+        queryable = queryable.Where(a =>
+            a.SourceChainId == input.SourceChainId && a.TargetChainId == input.TargetChainId);
+
+        return objectMapper.Map<List<TokenSwapConfigInfoIndex>, List<TokenSwapConfigDto>>(
+            queryable.ToList());
     }
 }

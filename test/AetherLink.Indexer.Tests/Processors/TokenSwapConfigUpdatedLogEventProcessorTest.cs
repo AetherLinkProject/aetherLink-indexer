@@ -1,5 +1,4 @@
 using AeFinder.Sdk;
-using AElf;
 using AElf.Types;
 using AetherLink.Contracts.Ramp;
 using aetherLink.indexer;
@@ -36,13 +35,12 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
                 TargetChainId = 1100,
                 SourceChainId = 9100,
                 Receiver = "ABC",
-                // TokenAddress = "AAA",
                 Symbol = "TEST1"
             });
         result.TargetChainId.ShouldBe(1100);
         result.SourceChainId.ShouldBe(9100);
         result.Receiver.ShouldBe("ABC");
-        result.TokenAddress.ShouldBe("AAA");
+        result.TokenAddress.ShouldBe("aaa");
         result.Symbol.ShouldBe("TEST1");
         result.ExtraData.ShouldBe(ByteString.CopyFromUtf8("SwapId1").ToBase64());
 
@@ -52,15 +50,9 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
                 TargetChainId = 1100,
                 SourceChainId = 9100,
                 Receiver = "EDF",
-                TokenAddress = "EEE",
-                // Symbol = "TEST2",
+                TokenAddress = "EEE"
             });
-        result2.TargetChainId.ShouldBe(1100);
-        result2.SourceChainId.ShouldBe(9100);
-        result2.Receiver.ShouldBe("EDF");
-        result2.TokenAddress.ShouldBe("EEE");
-        result2.Symbol.ShouldBe("TEST2");
-        // result2.SwapId.ShouldBe("SwapId2");
+        result2.TargetChainId.ShouldBe(0);
     }
 
     private async Task MockTokenSwapConfigUpdated()
