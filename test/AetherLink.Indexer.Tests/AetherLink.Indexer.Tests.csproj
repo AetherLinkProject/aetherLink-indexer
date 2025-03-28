@@ -1,23 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <RootNamespace>AetherLink.Indexer</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AElf.Client.Protobuf" Version="1.2.1" />
-        <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <ProjectReference Include="..\..\src\AetherLink.Indexer\AetherLink.Indexer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup> 
+        <PackageReference Include="AeFinder.Sdk" Version="1.1.0" />
+        <PackageReference Include="AeFinder.App.TestBase" Version="1.1.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="xunit.extensibility.execution" Version="2.4.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
+        <PackageReference Include="Shouldly" Version="4.0.3" />
+        <PackageReference Include="coverlet.collector" Version="3.2.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\AetherLink.Indexer\AetherLink.Indexer.csproj" />
-        <ProjectReference Include="..\AetherLink.Indexer.Orleans.TestBase\AetherLink.Indexer.Orleans.TestBase.csproj" />
+      <Folder Include="Contracts" />
     </ItemGroup>
-
 </Project>

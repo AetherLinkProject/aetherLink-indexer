@@ -1,24 +1,24 @@
-using AElfIndexer.Client.Handlers;
 using AetherLink.Indexer.Entities;
 using AetherLink.Indexer.GraphQL.Dtos;
 using AutoMapper;
 
 namespace AetherLink.Indexer;
 
-public class AetherLinkIndexerAutoMapperProfile : Profile
+public class AetherLinkIndexerProfile : Profile
 {
-    public AetherLinkIndexerAutoMapperProfile()
+    public AetherLinkIndexerProfile()
     {
-        // LogEvent Processor Map
-        CreateMap<LogEventContext, OcrJobEventIndex>();
-        CreateMap<LogEventContext, CommitmentIndex>();
-        CreateMap<LogEventContext, ConfigDigestIndex>();
-        CreateMap<LogEventContext, LatestRoundIndex>();
-
-        // Query Map
+        CreateMap<OcrJobEventIndex, CommitmentDto>();
+        CreateMap<TransmittedIndex, TransmittedDto>();
+        CreateMap<RequestCancelledIndex, RequestCancelledDto>();
         CreateMap<OcrJobEventIndex, OcrJobEventDto>();
-        CreateMap<CommitmentIndex, CommitmentDto>();
         CreateMap<ConfigDigestIndex, ConfigDigestDto>();
-        CreateMap<LatestRoundIndex, LatestRoundDto>();
+        CreateMap<TransmittedIndex, RequestStartEpochDto>();
+        CreateMap<TransactionEventIndex, TransactionEventDto>();
+        CreateMap<RampSendRequestedIndex, RampRequestDto>();
+        CreateMap<RampRequestCancelledIndex, RampRequestCancelledDto>();
+        CreateMap<RampRequestManuallyExecutedIndex, RampRequestManuallyExecutedDto>();
+        CreateMap<RampCommitReportAcceptedIndex, RampCommitReportAcceptedDto>();
+        CreateMap<TokenSwapConfigInfoIndex, TokenSwapConfigDto>();
     }
 }

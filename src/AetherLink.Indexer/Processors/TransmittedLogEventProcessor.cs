@@ -1,70 +1,42 @@
-using AElfIndexer.Client;
-using AElfIndexer.Client.Handlers;
-using AElfIndexer.Grains.State.Client;
+using AeFinder.Sdk.Logging;
+using AeFinder.Sdk.Processor;
 using AetherLink.Contracts.Oracle;
 using AetherLink.Indexer.Common;
 using AetherLink.Indexer.Entities;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.ObjectMapping;
 
 namespace AetherLink.Indexer.Processors;
 
-public class TransmittedLogEventProcessor : AElfLogEventProcessorBase<Transmitted, LogEventInfo>
+public class TransmittedLogEventProcessor : LogEventProcessorBase<Transmitted>
 {
-    private readonly IObjectMapper _objectMapper;
-    private readonly ContractInfoOptions _contractInfoOptions;
-    private readonly IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> _repository;
-    private readonly IAElfIndexerClientEntityRepository<LatestRoundIndex, LogEventInfo> _latestRoundRepository;
-    private readonly ILogger<TransmittedLogEventProcessor> _processorLogger;
+    private readonly IAeFinderLogger _logger;
 
-    public TransmittedLogEventProcessor(ILogger<TransmittedLogEventProcessor> logger, IObjectMapper objectMapper,
-        IAElfIndexerClientEntityRepository<OcrJobEventIndex, LogEventInfo> repository,
-        IOptions<ContractInfoOptions> contractInfoOptions,
-        IAElfIndexerClientEntityRepository<LatestRoundIndex, LogEventInfo> latestRoundRepository,
-        ILogger<TransmittedLogEventProcessor> processorLogger) : base(logger)
+    public TransmittedLogEventProcessor(IAeFinderLogger logger)
     {
-        _repository = repository;
-        _objectMapper = objectMapper;
-        _processorLogger = processorLogger;
-        _latestRoundRepository = latestRoundRepository;
-        _contractInfoOptions = contractInfoOptions.Value;
+        _logger = logger;
     }
 
-    public override string GetContractAddress(string chainId)
-    {
-        return _contractInfoOptions.ContractInfos.First(c => c.ChainId == chainId).AetherLinkOracleContractAddress;
-    }
+    public override string GetContractAddress(string chainId) => ContractAddressHelper.GetContractAddress(chainId);
 
-    protected override async Task HandleEventAsync(Transmitted eventValue, LogEventContext context)
+    public override async Task ProcessAsync(Transmitted logEvent, LogEventContext context)
     {
-        _processorLogger.LogDebug("[TransmittedLogEventProcessor] Transmitted chainId:{chainId}, requestId:{reqId}",
-            context.ChainId, eventValue.RequestId.ToHex());
-        var indexId = IndexPrefixHelper.GetTransmittedIndexId(context.ChainId, eventValue.RequestId.ToHex(),
-            eventValue.ConfigDigest.ToHex(), eventValue.EpochAndRound);
-        var ocrLogEventIndex = await _repository.GetFromBlockStateSetAsync(indexId, context.ChainId);
-        if (ocrLogEventIndex != null) return;
+        var chainId = context.ChainId;
+        var requestId = logEvent.RequestId.ToHex();
 
-        ocrLogEventIndex = new OcrJobEventIndex
+        _logger.LogDebug("[Transmitted] chainId:{chainId}, requestId:{reqId}", chainId, requestId);
+
+        var indexId = IdGenerateHelper.GetTransmittedId(chainId, requestId, logEvent.ConfigDigest.ToHex(),
+            logEvent.EpochAndRound);
+        if (await GetEntityAsync<TransmittedIndex>(indexId) != null) return;
+
+        await SaveEntityAsync(new TransmittedIndex
         {
             Id = indexId,
-            RequestId = eventValue.RequestId.ToHex(),
-            TransactionId = context.TransactionId,
-            RequestTypeIndex = -1,
-            StartTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds(),
-            Epoch = eventValue.EpochAndRound
-        };
-        _objectMapper.Map(context, ocrLogEventIndex);
-        await _repository.AddOrUpdateAsync(ocrLogEventIndex);
-
-        _processorLogger.LogDebug("[TransmittedLogEventProcessor] EpochAndRound chainId:{chainId}, address:{addr}",
-            context.ChainId, context.From);
-        var latestRoundIndex = new LatestRoundIndex
-        {
-            Id = IndexPrefixHelper.GetLatestRoundIndexId(context.ChainId, context.From),
-            EpochAndRound = eventValue.EpochAndRound
-        };
-        _objectMapper.Map(context, latestRoundIndex);
-        await _latestRoundRepository.AddOrUpdateAsync(latestRoundIndex);
+            ChainId = context.ChainId,
+            TransactionId = context.Transaction.TransactionId,
+            BlockHeight = context.Block.BlockHeight,
+            RequestId = logEvent.RequestId.ToHex(),
+            StartTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds(),
+            Epoch = logEvent.EpochAndRound
+        });
     }
 }
