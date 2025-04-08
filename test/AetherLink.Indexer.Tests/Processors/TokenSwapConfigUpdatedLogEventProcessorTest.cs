@@ -26,8 +26,39 @@ public class TokenSwapConfigUpdatedLogEventProcessorTest : AetherLinkIndexerTest
     }
 
     [Fact]
+    public async Task Query_Token_Swap_Config_Create_LogEvent_Test()
+    {
+        await MockTokenSwapConfigUpdated();
+        var result = await Query.TokenSwapConfigQueryAsync(_repository, _objectMapper,
+            new()
+            {
+                TargetChainId = 1100,
+                SourceChainId = 9100,
+                Receiver = "ABC",
+                Symbol = "TEST1"
+            });
+        result.TargetChainId.ShouldBe(1100);
+        result.SourceChainId.ShouldBe(9100);
+        result.Receiver.ShouldBe("ABC");
+        result.TokenAddress.ShouldBe("AAA");
+        result.Symbol.ShouldBe("TEST1");
+        result.ExtraData.ShouldBe(ByteString.CopyFromUtf8("SwapId1").ToBase64());
+
+        var result2 = await Query.TokenSwapConfigQueryAsync(_repository, _objectMapper,
+            new()
+            {
+                TargetChainId = 1100,
+                SourceChainId = 9100,
+                Receiver = "EDF",
+                TokenAddress = "EEE"
+            });
+        result2.TargetChainId.ShouldBe(1100);
+    }
+    
+    [Fact]
     public async Task Query_Token_Swap_Config_Updated_LogEvent_Test()
     {
+        await MockTokenSwapConfigUpdated();
         await MockTokenSwapConfigUpdated();
         var result = await Query.TokenSwapConfigQueryAsync(_repository, _objectMapper,
             new()
