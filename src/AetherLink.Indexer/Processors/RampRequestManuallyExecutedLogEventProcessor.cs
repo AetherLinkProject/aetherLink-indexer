@@ -1,9 +1,8 @@
 using AeFinder.Sdk.Logging;
 using AeFinder.Sdk.Processor;
+using AElf;
 using AetherLink.Contracts.Ramp;
 using AetherLink.Indexer.Common;
-using AetherLink.Indexer.Entities;
-using Google.Protobuf;
 
 namespace AetherLink.Indexer.Processors;
 
@@ -21,7 +20,7 @@ public class RampRequestManuallyExecutedLogEventProcessor : LogEventProcessorBas
     public override async Task ProcessAsync(RequestManuallyExecuted logEvent, LogEventContext context)
     {
         var chainId = context.ChainId;
-        var messageId = ByteString.CopyFrom(logEvent.MessageId.ToByteArray()).ToBase64();
+        var messageId = logEvent.MessageId.ToByteArray().ToHex();
         var blockHeight = context.Block.BlockHeight;
         _logger.LogDebug(
             $"[RequestManuallyExecuted] chainId:{chainId} messageId:{messageId} at {blockHeight}");
