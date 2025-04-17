@@ -38,8 +38,7 @@ public sealed class RampRequestCanceledLogEventProcessorTest : AetherLinkIndexer
                 ToBlockHeight = 200
             });
         result.Count.ShouldBe(1);
-        result.First().MessageId
-            .ShouldBe(ByteString.CopyFrom(HashHelper.ComputeFrom("test_message_id").ToByteArray()).ToBase64());
+        result.First().MessageId.ShouldBe(HashHelper.ComputeFrom("test_message_id").ToHex());
         result.First().ChainId.ShouldBe("AELF");
         result.First().BlockHeight.ShouldBe(ctx.Block.BlockHeight);
     }
