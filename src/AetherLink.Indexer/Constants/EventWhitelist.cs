@@ -4,6 +4,10 @@ public static class EventWhitelist
 {
     public static readonly List<string> Whitelist = new()
     {
+        "TransactionFeeClaimed",
+        "TransactionFeeCharged",
+        "RentalCharged",
+        "ParentChainIndexed",
         "MiningInformationUpdated",
         "ReceiptCreated",
         "ProposalReleased",

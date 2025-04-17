@@ -32,7 +32,7 @@ public class BlockProcessor : BlockProcessorBase
                 continue;
             }
 
-            await DeleteEntityAsync<TransactionEventIndex>(logEvent);
+            await DeleteEntityAsync(entity);
         }
 
         _logger.LogDebug($"Ready delete transaction event at {context.ChainId} {expiredBlockHeight}");
