@@ -36,7 +36,5 @@ public static class IdGenerateHelper
     public static string GetTransmittedId(string chainId, string requestId, string configDigest, long epochAndRound)
         => GetId(TransmittedPrefix, chainId, requestId, configDigest, epochAndRound);
 
-    public static string GetLogInfoId(string chainId, long blockHeight, string transactionId, string methodName,
-        string eventName, string contractAddress, int index) => GetId(LogInfoPrefix, chainId, blockHeight,
-        transactionId, methodName, eventName, contractAddress, index);
+    public static string GetLogInfoId(string transactionId, int index) => GetId(LogInfoPrefix, transactionId, index);
 }

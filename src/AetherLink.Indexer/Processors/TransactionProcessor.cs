@@ -45,8 +45,7 @@ public class TransactionProcessor : TransactionProcessorBase
     private async Task ProcessEventAsync(TransactionEventIndex info, LogEvent logEvent)
     {
         var contractAddress = logEvent.ContractAddress;
-        var id = IdGenerateHelper.GetLogInfoId(info.ChainId, info.BlockHeight, info.TransactionId, info.MethodName,
-            logEvent.EventName, contractAddress, logEvent.Index);
+        var id = IdGenerateHelper.GetLogInfoId(info.TransactionId, logEvent.Index);
         info.Id = id;
         info.EventName = logEvent.EventName;
         info.ContractAddress = contractAddress;

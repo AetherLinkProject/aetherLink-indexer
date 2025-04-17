@@ -16,6 +16,7 @@ public class AetherLinkIndexerTestModule : AbpModule
         Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<AetherLinkIndexerModule>(); });
 
         // Add your Processors.
+        context.Services.AddSingleton<RampRequestManuallyExecutedLogEventProcessor>();
         context.Services.AddSingleton<RampCommitReportAcceptedLogEventProcessor>();
         context.Services.AddSingleton<TokenSwapConfigUpdatedLogEventProcessor>();
         context.Services.AddSingleton<RampRequestCancelledLogEventProcessor>();
