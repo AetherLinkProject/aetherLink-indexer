@@ -37,7 +37,8 @@ public class RampCommitReportAcceptedLogEventProcessor : LogEventProcessorBase<C
             TargetChainId = logEvent.Report.ReportContext.TargetChainId,
             MessageId = messageId,
             BlockHeight = context.Block.BlockHeight,
-            TransactionId = context.Transaction.TransactionId
+            TransactionId = context.Transaction.TransactionId,
+            CommitTime = new DateTimeOffset(context.Block.BlockTime).ToUnixTimeMilliseconds()
         });
     }
 }
