@@ -8,4 +8,5 @@ public class RampCommitReportAcceptedDto
     public long TargetChainId { get; set; }
     public string MessageId { get; set; }
     public long BlockHeight { get; set; }
+    public long CommitTime { get; set; }
 }
